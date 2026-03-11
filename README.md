@@ -6,11 +6,9 @@ Built with **Next.js, AI APIs, and a modern chat interface**, this application s
 
 ---
 
-# 🌐 Live Demo
+## 🌐 Live Demo
 
-🚀 **Try the application**
-
-https://fitness-nutrition-chatbot.vercel.app
+[![Launch AI Fitness Coach](https://img.shields.io/badge/🚀%20Launch%20AI%20Fitness%20Coach-Live%20Demo-22c55e?style=for-the-badge)](https://fitness-nutrition-chatbot.vercel.app)
 
 Anyone can access the AI coach directly from the browser.
 
