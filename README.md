@@ -259,5 +259,3 @@ https://github.com/yashrajagawane
 # ⭐ Support
 
 If you like this project, please consider **starring the repository**.
-
-It helps others discover the project.
