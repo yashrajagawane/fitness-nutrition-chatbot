@@ -20,6 +20,7 @@ Built with **Next.js · Gemini API · TailwindCSS** — deployed live on Vercel.
 
 </div>
 
+
 ---
 
 ## 📸 Preview
