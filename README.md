@@ -4,8 +4,6 @@
 
 ### An intelligent AI-powered fitness and nutrition assistant that generates personalized workout plans, diet suggestions, and real-time coaching guidance.
 
-Built with **Next.js · Gemini API · TailwindCSS** — deployed live on Vercel.
-
 <br/>
 
 [![Launch App](https://img.shields.io/badge/🚀%20Launch%20AI%20Fitness%20Coach-CLICK%20HERE-22c55e?style=for-the-badge)](https://fitness-nutrition-chatbot.vercel.app)
