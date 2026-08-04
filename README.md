@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 <div align="center">
 
 # 🏋️ AI Fitness Coach
@@ -54,6 +56,8 @@
 AI-generated plans render as structured visual cards, not plain text — sets and reps laid out like a real fitness app, not a generic chatbot reply.
 
 </div>
+
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
 
 ---
 
@@ -137,6 +141,8 @@ The chatbot fully supports formatted AI responses including:
 
 This ensures AI answers are **clean, readable, and well-organized** — not walls of plain text.
 
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+
 ---
 
 ## 🛠 Tech Stack
@@ -155,6 +161,8 @@ This ensures AI answers are **clean, readable, and well-organized** — not wall
 ### Deployment
 - **Vercel** — Hosting and CI/CD pipeline directly from GitHub
 
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+
 ---
 
 ## 🏗️ Architecture
@@ -169,6 +177,8 @@ flowchart LR
 ```
 
 There's no separate backend or database — the Next.js API route calls Gemini directly on each message, injects the saved fitness profile as context, and streams the response back as it's generated. Session and profile data live entirely in the browser's `localStorage`.
+
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
 
 ---
 
@@ -186,6 +196,8 @@ components/
 
 screenshots/                   # Preview images used in this README
 ```
+
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
 
 ---
 
@@ -218,6 +230,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+
 ---
 
 ## 🧠 AI Capabilities
@@ -234,6 +248,8 @@ The AI fitness coach is capable of providing guidance on:
 
 All responses are structured to resemble **professional fitness coaching advice** — not generic AI output.
 
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+
 ---
 
 ## 🎯 Project Purpose
@@ -248,6 +264,8 @@ This project demonstrates how to build a **production-grade AI-powered web appli
 
 It serves as a **portfolio-level project** that showcases practical AI integration, thoughtful UI/UX design, and full-stack engineering skills.
 
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+
 ---
 
 ## 📈 Future Improvements
@@ -259,11 +277,15 @@ It serves as a **portfolio-level project** that showcases practical AI integrati
 - [ ] Mobile-first responsive redesign
 - [ ] Push notifications for workout reminders
 
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+
 ---
 
 ## ⚠️ Disclaimer
 
 This project provides general, AI-generated fitness and nutrition information for educational and portfolio purposes. It is **not a substitute for advice from a certified personal trainer, registered dietitian, or physician**. Consult a qualified professional before starting any new workout or diet program, especially if you have an existing health condition or injury.
+
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
 
 ---
 
@@ -272,6 +294,8 @@ This project provides general, AI-generated fitness and nutrition information fo
 **Yashraj Agawane**
 
 [![GitHub](https://img.shields.io/badge/GitHub-yashrajagawane-181717?style=flat-square&logo=github)](https://github.com/yashrajagawane)
+
+<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
 
 ---
 
