@@ -57,7 +57,7 @@ AI-generated plans render as structured visual cards, not plain text — sets an
 
 </div>
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -178,7 +178,7 @@ flowchart LR
 
 There's no separate backend or database — the Next.js API route calls Gemini directly on each message, injects the saved fitness profile as context, and streams the response back as it's generated. Session and profile data live entirely in the browser's `localStorage`.
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
