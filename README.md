@@ -1,8 +1,9 @@
 <div align="center">
-  
+
 # 🏋️ AI Fitness Coach
 
 ### An intelligent AI-powered fitness and nutrition assistant that generates personalized workout plans, diet suggestions, and real-time coaching guidance.
+
 <br/>
 
 [![Launch App](https://img.shields.io/badge/🚀%20Launch%20AI%20Fitness%20Coach-CLICK%20HERE-22c55e?style=for-the-badge)](https://fitness-nutrition-chatbot.vercel.app)
@@ -15,31 +16,44 @@
 ![Gemini](https://img.shields.io/badge/Gemini-AI%20Powered-4285F4?style=flat-square&logo=google&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 
+**[📸 Preview](#-preview)** · **[⚡ Features](#-features)** · **[🛠 Tech Stack](#-tech-stack)** · **[🚀 Get Started](#-local-development)**
+
 </div>
 
+---
+
+## 📑 Table of Contents
+
+- [Preview](#-preview)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Architecture](#️-architecture)
+- [Project Structure](#-project-structure)
+- [Local Development](#-local-development)
+- [AI Capabilities](#-ai-capabilities)
+- [Project Purpose](#-project-purpose)
+- [Future Improvements](#-future-improvements)
+- [Disclaimer](#️-disclaimer)
+- [Author](#-author)
 
 ---
 
 ## 📸 Preview
 
-### 👤 Fitness Profile Setup
-![Profile UI](screenshots/profile.png)
+<div align="center">
 
-> Users input their personal fitness data — age, height, weight, gender, goal, and activity level. This profile is used by the AI for all personalized recommendations.
+| Fitness Profile Setup | Chat Interface |
+|:---:|:---:|
+| ![Profile UI](screenshots/profile.png) | ![Chat UI](screenshots/chat.png) |
+| Age, height, weight, gender, goal, and activity level — feeds every AI recommendation | Clean, real-time streaming chat for fitness and nutrition questions |
 
----
+**💪 Workout Plan Generation**
 
-### 💬 Chat Interface
-![Chat UI](screenshots/chat.png)
-
-> A clean, real-time chat experience where users can ask fitness and nutrition questions and receive structured AI responses.
-
----
-
-### 💪 Workout Plan Generation
 ![Workout Plan](screenshots/workout.png)
 
-> AI-generated workout plans are automatically rendered as visual structured cards — not plain text — making the interface feel like a real fitness application.
+AI-generated plans render as structured visual cards, not plain text — sets and reps laid out like a real fitness app, not a generic chatbot reply.
+
+</div>
 
 ---
 
@@ -143,6 +157,21 @@ This ensures AI answers are **clean, readable, and well-organized** — not wall
 
 ---
 
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+    U["Browser<br/>Chat UI + Profile (localStorage)"] -->|"POST /api/chat"| R["Next.js API Route<br/>app/api/chat/route.ts"]
+    R -->|"prompt + profile context"| G["Google Gemini API"]
+    G -->|"streamed tokens"| R
+    R -->|"streamed response"| U
+    U --> M["React Markdown /<br/>WorkoutCard renderer"]
+```
+
+There's no separate backend or database — the Next.js API route calls Gemini directly on each message, injects the saved fitness profile as context, and streams the response back as it's generated. Session and profile data live entirely in the browser's `localStorage`.
+
+---
+
 ## 📂 Project Structure
 
 ```
@@ -154,6 +183,8 @@ app/
 
 components/
 └── WorkoutCard.tsx            # Workout plan structured card renderer
+
+screenshots/                   # Preview images used in this README
 ```
 
 ---
@@ -227,6 +258,12 @@ It serves as a **portfolio-level project** that showcases practical AI integrati
 - [ ] AI-generated weekly meal plans with calorie breakdown
 - [ ] Mobile-first responsive redesign
 - [ ] Push notifications for workout reminders
+
+---
+
+## ⚠️ Disclaimer
+
+This project provides general, AI-generated fitness and nutrition information for educational and portfolio purposes. It is **not a substitute for advice from a certified personal trainer, registered dietitian, or physician**. Consult a qualified professional before starting any new workout or diet program, especially if you have an existing health condition or injury.
 
 ---
 
