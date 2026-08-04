@@ -141,7 +141,7 @@ The chatbot fully supports formatted AI responses including:
 
 This ensures AI answers are **clean, readable, and well-organized** — not walls of plain text.
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -161,7 +161,7 @@ This ensures AI answers are **clean, readable, and well-organized** — not wall
 ### Deployment
 - **Vercel** — Hosting and CI/CD pipeline directly from GitHub
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -197,7 +197,7 @@ components/
 screenshots/                   # Preview images used in this README
 ```
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -230,7 +230,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -248,7 +248,7 @@ The AI fitness coach is capable of providing guidance on:
 
 All responses are structured to resemble **professional fitness coaching advice** — not generic AI output.
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -264,7 +264,7 @@ This project demonstrates how to build a **production-grade AI-powered web appli
 
 It serves as a **portfolio-level project** that showcases practical AI integration, thoughtful UI/UX design, and full-stack engineering skills.
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -277,7 +277,7 @@ It serves as a **portfolio-level project** that showcases practical AI integrati
 - [ ] Mobile-first responsive redesign
 - [ ] Push notifications for workout reminders
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -285,7 +285,7 @@ It serves as a **portfolio-level project** that showcases practical AI integrati
 
 This project provides general, AI-generated fitness and nutrition information for educational and portfolio purposes. It is **not a substitute for advice from a certified personal trainer, registered dietitian, or physician**. Consult a qualified professional before starting any new workout or diet program, especially if you have an existing health condition or injury.
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -295,7 +295,7 @@ This project provides general, AI-generated fitness and nutrition information fo
 
 [![GitHub](https://img.shields.io/badge/GitHub-yashrajagawane-181717?style=flat-square&logo=github)](https://github.com/yashrajagawane)
 
-<p align="right">(<a href="#readme-top">back to top ⬆️</a>)</p>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
