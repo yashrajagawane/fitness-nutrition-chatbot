@@ -44,10 +44,17 @@
 
 <div align="center">
 
-| Fitness Profile Setup | Chat Interface |
-|:---:|:---:|
-| ![Profile UI](screenshots/profile.png) | ![Chat UI](screenshots/chat.png) |
-| Age, height, weight, gender, goal, and activity level — feeds every AI recommendation | Clean, real-time streaming chat for fitness and nutrition questions |
+**🧍 Fitness Profile Setup**
+
+![Profile UI](screenshots/profile.png)
+
+Age, height, weight, gender, goal, and activity level — feeds every AI recommendation
+
+**💬 Chat Interface**
+
+![Chat UI](screenshots/chat.png)
+
+Clean, real-time streaming chat for fitness and nutrition questions
 
 **💪 Workout Plan Generation**
 
