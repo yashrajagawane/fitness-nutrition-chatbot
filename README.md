@@ -1,7 +1,5 @@
 <a name="readme-top"></a>
-
 <div align="center">
-
 # 🏋️ AI Fitness Coach
 
 ### An intelligent AI-powered fitness and nutrition assistant that generates personalized workout plans, diet suggestions, and real-time coaching guidance.
