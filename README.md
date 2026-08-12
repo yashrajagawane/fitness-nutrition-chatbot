@@ -154,18 +154,27 @@ This ensures AI answers are **clean, readable, and well-organized** — not wall
 ## 🛠 Tech Stack
 
 ### Frontend
-- **Next.js** (App Router) — Full-stack React framework
-- **React 18** — UI component library
-- **TailwindCSS** — Utility-first styling
-- **React Markdown** — Formatted response rendering
-- **Lucide Icons** — Icon library
+
+| Technology | Purpose |
+|:---:|:---|
+| ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white) | App Router — Full-stack React framework |
+| ![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | UI component library |
+| ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | Utility-first styling |
+| ![React Markdown](https://img.shields.io/badge/React_Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white) | Formatted response rendering |
+| ![Lucide Icons](https://img.shields.io/badge/Lucide_Icons-F56565?style=for-the-badge&logo=lucide&logoColor=white) | Icon library |
 
 ### Backend
-- **Next.js API Routes** — Serverless backend handlers
-- **Google Gemini API** — Core AI model integration
+
+| Technology | Purpose |
+|:---:|:---|
+| ![Next.js API Routes](https://img.shields.io/badge/API_Routes-000000?style=for-the-badge&logo=next.js&logoColor=white) | Serverless backend handlers |
+| ![Google Gemini](https://img.shields.io/badge/Google_Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white) | Core AI model integration |
 
 ### Deployment
-- **Vercel** — Hosting and CI/CD pipeline directly from GitHub
+
+| Technology | Purpose |
+|:---:|:---|
+| ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) | Hosting and CI/CD pipeline directly from GitHub |
 
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
