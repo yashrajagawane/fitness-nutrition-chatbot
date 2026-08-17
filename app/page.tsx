@@ -551,19 +551,19 @@ export default function App() {
         <div key={idx} className="overflow-x-auto whitespace-pre-wrap break-words">
           <ReactMarkdown 
             components={{
-              h1: ({ node, ...props }) => <h1 className="text-xl font-extrabold text-white mt-5 mb-3 border-b border-zinc-800 pb-2" {...props} />,
-              h2: ({ node, ...props }) => <h2 className="text-lg font-bold text-emerald-400 mt-5 mb-3 first:mt-0" {...props} />,
-              h3: ({ node, ...props }) => <h3 className="text-base font-semibold text-emerald-300 mt-4 mb-2 first:mt-0" {...props} />,
-              ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-4 space-y-1.5 text-zinc-300 marker:text-emerald-500" {...props} />,
-              ol: ({ node, ...props }) => <ol className="list-decimal pl-5 mb-4 space-y-1.5 text-zinc-300 marker:text-emerald-500 font-medium" {...props} />,
-              li: ({ node, ...props }) => <li className="pl-1 leading-relaxed" {...props} />,
-              p: ({ node, ...props }) => <p className="mb-3 last:mb-0 text-zinc-300 leading-relaxed" {...props} />,
-              strong: ({ node, ...props }) => <strong className="font-semibold text-emerald-400" {...props} />,
-              blockquote: ({ node, ...props }) => <blockquote className="border-l-2 border-emerald-500 pl-4 py-1 my-3 italic text-zinc-400 bg-emerald-950/10 rounded-r-lg" {...props} />,
-              code: ({ node, inline, children, ...props }: any) => 
-                inline 
-                  ? <code className="bg-zinc-800/50 text-emerald-300 px-1.5 py-0.5 rounded text-xs font-mono" {...props}>{children}</code>
-                  : <div className="overflow-x-auto my-3 border border-zinc-800 rounded-xl bg-[#141417] shadow-sm"><pre className="p-4 text-xs sm:text-sm font-mono text-zinc-300 whitespace-pre" {...props}>{children}</pre></div>
+              h1: (props) => <h1 className="text-xl font-extrabold text-white mt-5 mb-3 border-b border-zinc-800 pb-2" {...props} />,
+              h2: (props) => <h2 className="text-lg font-bold text-emerald-400 mt-5 mb-3 first:mt-0" {...props} />,
+              h3: (props) => <h3 className="text-base font-semibold text-emerald-300 mt-4 mb-2 first:mt-0" {...props} />,
+              ul: (props) => <ul className="list-disc pl-5 mb-4 space-y-1.5 text-zinc-300 marker:text-emerald-500" {...props} />,
+              ol: (props) => <ol className="list-decimal pl-5 mb-4 space-y-1.5 text-zinc-300 marker:text-emerald-500 font-medium" {...props} />,
+              li: (props) => <li className="pl-1 leading-relaxed" {...props} />,
+              p: (props) => <p className="mb-3 last:mb-0 text-zinc-300 leading-relaxed" {...props} />,
+              strong: (props) => <strong className="font-semibold text-emerald-400" {...props} />,
+              blockquote: (props) => <blockquote className="border-l-2 border-emerald-500 pl-4 py-1 my-3 italic text-zinc-400 bg-emerald-950/10 rounded-r-lg" {...props} />,
+              code: ({ className, children, ...props }) =>
+                className
+                  ? <div className="overflow-x-auto my-3 border border-zinc-800 rounded-xl bg-[#141417] shadow-sm"><pre className="p-4 text-xs sm:text-sm font-mono text-zinc-300 whitespace-pre">{children}</pre></div>
+                  : <code className="bg-zinc-800/50 text-emerald-300 px-1.5 py-0.5 rounded text-xs font-mono" {...props}>{children}</code>
             }}
           >
             {safeContent}

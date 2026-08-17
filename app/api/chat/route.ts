@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     // Map conversation history to Gemini format (user -> user, assistant -> model)
-    const contents = (history || []).map((msg: any) => ({
+    const contents = (history || []).map((msg) => ({
       role: msg.role === "user" ? "user" : "model",
       parts: [{ text: msg.content }],
     }));
@@ -131,10 +131,10 @@ Always add this at the end:
       timestamp: new Date().toISOString(),
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Vitalis API Route Error:", error);
 
-    if (error.name === "AbortError") {
+    if (error instanceof Error && error.name === "AbortError") {
       return NextResponse.json(
         { error: "The AI coach took too long to respond. Please simplify your request." },
         { status: 504 }

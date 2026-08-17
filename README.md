@@ -12,7 +12,7 @@
 <br/>
 
 ![Next.js](https://img.shields.io/badge/Next.js-App%20Router-black?style=flat-square&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-Styling-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
 ![Gemini](https://img.shields.io/badge/Gemini-AI%20Powered-4285F4?style=flat-square&logo=google&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
@@ -54,7 +54,7 @@ Age, height, weight, gender, goal, and activity level — feeds every AI recomme
 
 ![Chat UI](screenshots/chat.png)
 
-Clean, real-time streaming chat for fitness and nutrition questions
+Responsive AI chat for fitness and nutrition questions
 
 **💪 Workout Plan Generation**
 
@@ -117,9 +117,9 @@ This makes the UI feel like a **dedicated fitness application** rather than a ge
 
 ---
 
-### ⚡ Streaming AI Responses
+### ⚡ Responsive AI Responses
 
-Responses are **streamed progressively** to simulate real-time AI typing — similar to the experience in ChatGPT or Claude.
+Responses are displayed with a responsive typing effect after the Gemini response is received, making the experience feel immediate and readable.
 
 This dramatically improves the feel of the application, making it responsive and interactive rather than waiting for a full response to load.
 
@@ -159,7 +159,7 @@ This ensures AI answers are **clean, readable, and well-organized** — not wall
 | Technology | Purpose |
 |:---:|:---|
 | ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white) | App Router — Full-stack React framework |
-| ![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | UI component library |
+| ![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | UI component library |
 | ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | Utility-first styling |
 | ![React Markdown](https://img.shields.io/badge/React_Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white) | Formatted response rendering |
 | ![Lucide Icons](https://img.shields.io/badge/Lucide_Icons-F56565?style=for-the-badge&logo=lucide&logoColor=white) | Icon library |
@@ -186,12 +186,12 @@ This ensures AI answers are **clean, readable, and well-organized** — not wall
 flowchart LR
     U["Browser<br/>Chat UI + Profile (localStorage)"] -->|"POST /api/chat"| R["Next.js API Route<br/>app/api/chat/route.ts"]
     R -->|"prompt + profile context"| G["Google Gemini API"]
-    G -->|"streamed tokens"| R
-    R -->|"streamed response"| U
+    G -->|"generated response"| R
+    R -->|"JSON response + UI typing effect"| U
     U --> M["React Markdown /<br/>WorkoutCard renderer"]
 ```
 
-There's no separate backend or database — the Next.js API route calls Gemini directly on each message, injects the saved fitness profile as context, and streams the response back as it's generated. Session and profile data live entirely in the browser's `localStorage`.
+There's no separate backend or database — the Next.js API route calls Gemini directly on each message and injects the saved fitness profile as context. Session and profile data live entirely in the browser's `localStorage`, with defensive parsing for corrupted or outdated stored data.
 
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
@@ -205,9 +205,6 @@ app/
 │   └── chat/
 │       └── route.ts          # AI backend route — Gemini API integration
 └── page.tsx                  # Main chatbot UI
-
-components/
-└── WorkoutCard.tsx            # Workout plan structured card renderer
 
 screenshots/                   # Preview images used in this README
 ```
@@ -243,6 +240,11 @@ Get your API key from [Google AI Studio](https://aistudio.google.com).
 npm run dev
 ```
 
+Run the full local verification suite before opening a pull request:
+```bash
+npm run verify
+```
+
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
@@ -273,7 +275,7 @@ This project demonstrates how to build a **production-grade AI-powered web appli
 
 - Conversational UI design with chat session management
 - AI model integration via serverless API routes
-- Real-time response streaming for better UX
+- Responsive response presentation for better UX
 - Structured data rendering from AI output (workout cards)
 - User profile context injection into AI prompts
 
