@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { validateChatRequest } from "@/app/lib/validation";
 
 /**
  * AI FITNESS COACH - GEMINI ENGINE
@@ -8,15 +9,15 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { message, history } = body;
-
-    if (!message || typeof message !== "string") {
+    const validation = validateChatRequest(await req.json());
+    if (!validation.success) {
       return NextResponse.json(
-        { error: "A valid message string is required." },
+        { error: validation.error },
         { status: 400 }
       );
     }
+
+    const { message, history = [] } = validation.data;
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {

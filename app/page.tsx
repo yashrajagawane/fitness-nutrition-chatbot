@@ -23,31 +23,10 @@ import {
 } from "lucide-react";
 
 import ReactMarkdown from "react-markdown";
+import { loadProfile, loadSessions, saveProfile, saveSessions } from "./lib/storage";
+import type { ChatSession, Message, UserProfile } from "./lib/types";
 
 /* ---------------- TYPES & INTERFACES ---------------- */
-
-interface Message {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-  timestamp: Date;
-}
-
-interface ChatSession {
-  id: string;
-  title: string;
-  messages: Message[];
-  createdAt: Date | string;
-}
-
-interface UserProfile {
-  age: string;
-  height: string;
-  weight: string;
-  gender: string;
-  goal: string;
-  activity: string;
-}
 
 /* ---------------- SIDEBAR COMPONENT ---------------- */
 
@@ -359,6 +338,7 @@ export default function App() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);       // API is fetching
   const [streaming, setStreaming] = useState(false);   // UI is simulating typing
+  const [error, setError] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   
   // Profile State
@@ -378,31 +358,17 @@ export default function App() {
   /* ---------- INITIALIZATION ---------- */
 
   useEffect(()=>{
-    // Load Profile
-    const savedProfile = localStorage.getItem("vitalis_profile");
+    const savedProfile = loadProfile();
     if (savedProfile) {
-      setUserProfile(JSON.parse(savedProfile));
+      setUserProfile(savedProfile);
     } else {
       setShowProfileModal(true); // Force onboarding if missing
     }
 
-    // Load History
-    const savedHistory = localStorage.getItem("vitalis_sessions");
-    if(savedHistory){
-      try{
-        const parsed = JSON.parse(savedHistory).map((s:any)=>({
-          ...s,
-          createdAt:new Date(s.createdAt),
-          messages:s.messages.map((m:any)=>({
-            ...m,
-            timestamp:new Date(m.timestamp)
-          }))
-        }));
-        setSessions(parsed);
-        setCurrentSessionId(parsed[0]?.id||null);
-      }catch{
-        localStorage.removeItem("vitalis_sessions");
-      }
+    const savedHistory = loadSessions();
+    if(savedHistory.length){
+      setSessions(savedHistory);
+      setCurrentSessionId(savedHistory[0]?.id||null);
     }else{
       createSession();
     }
@@ -412,7 +378,7 @@ export default function App() {
 
   useEffect(()=>{
     if(sessions.length){
-      localStorage.setItem("vitalis_sessions",JSON.stringify(sessions));
+      saveSessions(sessions);
     }
     messagesEndRef.current?.scrollIntoView({ behavior:"smooth", block:"end" });
   },[sessions]);
@@ -443,7 +409,7 @@ export default function App() {
 
   const handleSaveProfile = (profile: UserProfile) => {
     setUserProfile(profile);
-    localStorage.setItem("vitalis_profile", JSON.stringify(profile));
+    saveProfile(profile);
     setShowProfileModal(false);
   };
 
@@ -486,6 +452,7 @@ export default function App() {
   const sendMessage = async(text?:string)=>{
     const message=text||input;
     if(!message.trim()||loading||streaming||!currentSessionId) return;
+    setError(null);
 
     const userMsg:Message={
       id:Date.now().toString(), role:"user", content:message, timestamp:new Date()
@@ -525,6 +492,9 @@ export default function App() {
       });
 
       const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.error || "The AI coach could not process that request.");
+      }
       setLoading(false); // API fetch complete, start streaming
 
       const aiMsg:Message={
@@ -540,9 +510,10 @@ export default function App() {
         targetSessionId
       );
 
-    }catch{
-      console.error("AI error");
+    }catch (requestError) {
+      console.error("AI error", requestError);
       setLoading(false);
+      setError(requestError instanceof Error ? requestError.message : "The AI coach is temporarily unavailable. Please try again.");
     }
   };
 
@@ -644,6 +615,14 @@ export default function App() {
         {/* Messages */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-8 custom-scrollbar">
           <div className="max-w-4xl mx-auto space-y-10">
+            {error && (
+              <div role="alert" className="flex items-start justify-between gap-4 rounded-2xl border border-red-900/60 bg-red-950/30 px-4 py-3 text-sm text-red-200">
+                <span>{error}</span>
+                <button onClick={() => setError(null)} className="text-red-300 hover:text-white" aria-label="Dismiss error">
+                  <X size={16} />
+                </button>
+              </div>
+            )}
             {messages.map(m=>(
               <div key={m.id} className={`flex gap-4 ${m.role==="user"?"flex-row-reverse":""}`}>
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg ${
