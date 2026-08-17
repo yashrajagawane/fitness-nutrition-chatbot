@@ -19,7 +19,9 @@ import {
   History,
   Settings,
   ChevronRight,
-  Target
+  Target,
+  Copy,
+  RefreshCw
 } from "lucide-react";
 
 import ReactMarkdown from "react-markdown";
@@ -339,6 +341,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);       // API is fetching
   const [streaming, setStreaming] = useState(false);   // UI is simulating typing
   const [error, setError] = useState<string | null>(null);
+  const [copiedMessageId, setCopiedMessageId] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   
   // Profile State
@@ -354,6 +357,7 @@ export default function App() {
   );
 
   const messages = currentSession?.messages || [];
+  const lastUserMessage = [...messages].reverse().find((message) => message.role === "user");
 
   /* ---------- INITIALIZATION ---------- */
 
@@ -449,10 +453,14 @@ export default function App() {
 
   /* ---------- SEND MESSAGE ---------- */
 
-  const sendMessage = async(text?:string)=>{
+  const sendMessage = async(text?:string, options?: { replaceFrom?: number })=>{
     const message=text||input;
     if(!message.trim()||loading||streaming||!currentSessionId) return;
     setError(null);
+
+    const baseMessages = options?.replaceFrom === undefined
+      ? messages
+      : messages.slice(0, options.replaceFrom);
 
     const userMsg:Message={
       id:Date.now().toString(), role:"user", content:message, timestamp:new Date()
@@ -463,8 +471,8 @@ export default function App() {
         if(s.id!==currentSessionId) return s;
         return{
           ...s,
-          title: s.messages.length===1 ? message.slice(0,30).trim()+(message.length>30?"...":"") : s.title,
-          messages:[...s.messages,userMsg]
+          title: baseMessages.length===1 ? message.slice(0,30).trim()+(message.length>30?"...":"") : s.title,
+          messages:[...baseMessages,userMsg]
         };
       })
     );
@@ -487,7 +495,7 @@ export default function App() {
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
           message: message + secretPrompt, 
-          history:messages.slice(-10).map(m=>({ role:m.role, content:m.content }))
+          history:baseMessages.slice(-10).map(m=>({ role:m.role, content:m.content }))
         })
       });
 
@@ -514,6 +522,24 @@ export default function App() {
       console.error("AI error", requestError);
       setLoading(false);
       setError(requestError instanceof Error ? requestError.message : "The AI coach is temporarily unavailable. Please try again.");
+    }
+  };
+
+  const retryLastMessage = () => {
+    if (!lastUserMessage || loading || streaming) return;
+    const messageIndex = messages.findIndex((message) => message.id === lastUserMessage.id);
+    if (messageIndex >= 0) {
+      void sendMessage(lastUserMessage.content, { replaceFrom: messageIndex });
+    }
+  };
+
+  const copyMessage = async (message: Message) => {
+    try {
+      await navigator.clipboard.writeText(message.content);
+      setCopiedMessageId(message.id);
+      window.setTimeout(() => setCopiedMessageId(null), 1600);
+    } catch {
+      setError("Copying is unavailable in this browser. Select the response text manually instead.");
     }
   };
 
@@ -617,13 +643,16 @@ export default function App() {
           <div className="max-w-4xl mx-auto space-y-10">
             {error && (
               <div role="alert" className="flex items-start justify-between gap-4 rounded-2xl border border-red-900/60 bg-red-950/30 px-4 py-3 text-sm text-red-200">
-                <span>{error}</span>
+                <div className="flex items-center gap-3">
+                  <span>{error}</span>
+                  {lastUserMessage && <button onClick={retryLastMessage} className="font-bold text-red-100 underline underline-offset-2 hover:text-white">Retry</button>}
+                </div>
                 <button onClick={() => setError(null)} className="text-red-300 hover:text-white" aria-label="Dismiss error">
                   <X size={16} />
                 </button>
               </div>
             )}
-            {messages.map(m=>(
+            {messages.map((m, index)=>(
               <div key={m.id} className={`flex gap-4 ${m.role==="user"?"flex-row-reverse":""}`}>
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg ${
                   m.role === "user" ? "bg-zinc-800 text-white" : "bg-emerald-600 text-white shadow-emerald-500/20"
@@ -637,6 +666,20 @@ export default function App() {
                     :"bg-[#0f0f11] border border-zinc-800/80 rounded-tl-none"
                 }`}>
                   {renderMessageContent(m.content)}
+                  {m.role === "assistant" && m.content && (
+                    <div className="mt-4 flex items-center gap-3 border-t border-zinc-800/70 pt-3 text-[11px] font-bold uppercase tracking-wider text-zinc-500">
+                      <button onClick={() => void copyMessage(m)} className="flex items-center gap-1.5 transition-colors hover:text-emerald-400" aria-label="Copy response">
+                        <Copy size={13} />
+                        {copiedMessageId === m.id ? "Copied" : "Copy"}
+                      </button>
+                      {index === messages.length - 1 && lastUserMessage && (
+                        <button onClick={retryLastMessage} disabled={loading || streaming} className="flex items-center gap-1.5 transition-colors hover:text-emerald-400 disabled:cursor-not-allowed disabled:opacity-40" aria-label="Regenerate response">
+                          <RefreshCw size={13} />
+                          Regenerate
+                        </button>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

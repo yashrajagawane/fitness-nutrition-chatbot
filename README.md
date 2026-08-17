@@ -135,6 +135,8 @@ Users can manage multiple independent consultation sessions:
 
 Session data is stored persistently in **localStorage** — no backend database required.
 
+The chat also supports copying assistant responses, regenerating the latest answer, and retrying failed requests without manually re-entering the question.
+
 ---
 
 ### 📝 Markdown Rendering
