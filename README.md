@@ -98,6 +98,8 @@ Users can store and save their personal fitness data:
 
 This information is automatically injected into every AI request to generate **truly personalized recommendations**.
 
+The profile also supports preferred units, experience level, available equipment, weekly schedule, dietary preferences, and injury or limitation notes.
+
 ---
 
 ### 💪 Workout Plan UI Cards
@@ -149,6 +151,12 @@ The chatbot fully supports formatted AI responses including:
 - Bold and italic emphasis
 
 This ensures AI answers are **clean, readable, and well-organized** — not walls of plain text.
+
+### 📈 Saved Plans and Progress Tracking
+
+- Save useful coach responses for later reference.
+- Log workouts, weight, water, sleep, and notes in the Progress dashboard.
+- Keep this tracking data private in the browser during the current no-account phase.
 
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 

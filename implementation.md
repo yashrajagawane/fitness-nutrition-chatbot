@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: Phase 1 — Better Chat and AI Quality
+## Current Phase: Phase 2 — Profiles, Plans, and Tracking
 
 Status: **Complete**
 
@@ -60,6 +60,33 @@ Phase 1 is represented by exactly two commits on main:
 1. 86d535c — feat: strengthen phase 1 ai safety and reliability
 2. feat: add phase 1 conversation controls
 
+## Phase 2 Completed Work
+
+- Expanded onboarding with units, experience level, equipment, weekly schedule, dietary preferences, and injuries or limitations.
+- Added backward-compatible profile migration defaults for existing browser data.
+- Included the richer profile context in AI requests so recommendations can respect equipment, schedule, diet, and limitations.
+- Added a browser-only Progress & Saved Plans dashboard.
+- Added progress entries for date, weight, workouts, water, sleep, and notes.
+- Added save and remove controls for useful assistant responses.
+- Added defensive local storage parsing for saved plans and progress entries.
+
+### Phase 2 Verification
+
+The following checks passed during implementation:
+
+- npm run lint
+- npm run typecheck
+
+The production build passed before the final Phase 2 documentation commit.
+
+### Phase 2 GitHub Commits
+
+Phase 2 is represented by three commits on main:
+
+1. feat: expand phase 2 fitness profile
+2. feat: add phase 2 plans and progress tracking
+3. chore: complete phase 2 documentation and verification
+
 ### Next Phase
 
-Phase 2 will focus on profiles, saved plans, and tracking: richer onboarding, plan persistence, progress dashboards, and goal-aware regeneration.
+Phase 3 will focus on optional authentication and durable database-backed data with ownership checks, import/export, and account deletion controls.
