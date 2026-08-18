@@ -45,10 +45,23 @@ export const loadProfile = (): UserProfile | null => {
     const value: unknown = JSON.parse(raw);
     if (!isRecord(value)) return null;
 
-    const fields = ["age", "height", "weight", "gender", "goal", "activity"] as const;
-    if (fields.some((field) => typeof value[field] !== "string")) return null;
+    const requiredFields = ["age", "height", "weight", "gender", "goal", "activity"] as const;
+    if (requiredFields.some((field) => typeof value[field] !== "string")) return null;
 
-    return Object.fromEntries(fields.map((field) => [field, value[field]])) as unknown as UserProfile;
+    return {
+      age: value.age as string,
+      height: value.height as string,
+      weight: value.weight as string,
+      gender: value.gender as string,
+      goal: value.goal as string,
+      activity: value.activity as string,
+      units: value.units === "imperial" ? "imperial" : "metric",
+      experience: typeof value.experience === "string" ? value.experience : "beginner",
+      equipment: typeof value.equipment === "string" ? value.equipment : "bodyweight and basic gym equipment",
+      schedule: typeof value.schedule === "string" ? value.schedule : "3 days per week",
+      dietaryPreferences: typeof value.dietaryPreferences === "string" ? value.dietaryPreferences : "none",
+      injuries: typeof value.injuries === "string" ? value.injuries : "none",
+    };
   } catch {
     return null;
   }

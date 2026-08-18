@@ -239,7 +239,9 @@ const ProfileModal = ({
   onClose: () => void 
 }) => {
   const [formData, setFormData] = useState<UserProfile>(profile || {
-    age: '', height: '', weight: '', gender: 'male', goal: 'fat loss', activity: 'moderate'
+    age: '', height: '', weight: '', gender: 'male', goal: 'fat loss', activity: 'moderate',
+    units: 'metric', experience: 'beginner', equipment: 'bodyweight and basic gym equipment',
+    schedule: '3 days per week', dietaryPreferences: 'none', injuries: 'none'
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -314,6 +316,45 @@ const ProfileModal = ({
               <option value="moderate">Moderately Active (3-5 days/week)</option>
               <option value="very active">Very Active (6-7 days/week)</option>
             </select>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 pt-2">
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider pl-1">Units</label>
+              <select name="units" value={formData.units} onChange={handleChange} className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none transition-colors appearance-none">
+                <option value="metric">Metric (kg / cm)</option>
+                <option value="imperial">Imperial (lb / ft)</option>
+              </select>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider pl-1">Experience</label>
+              <select name="experience" value={formData.experience} onChange={handleChange} className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none transition-colors appearance-none">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="space-y-1.5 pt-2">
+            <label className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider pl-1">Available Equipment</label>
+            <input name="equipment" placeholder="e.g. dumbbells, resistance bands, gym" value={formData.equipment} onChange={handleChange} className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none transition-colors" />
+          </div>
+
+          <div className="space-y-1.5 pt-2">
+            <label className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider pl-1">Weekly Schedule</label>
+            <input name="schedule" placeholder="e.g. 4 days, 45 minutes each" value={formData.schedule} onChange={handleChange} className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none transition-colors" />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 pt-2">
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider pl-1">Diet Preferences</label>
+              <input name="dietaryPreferences" placeholder="e.g. vegetarian, halal" value={formData.dietaryPreferences} onChange={handleChange} className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none transition-colors" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider pl-1">Injuries or Limits</label>
+              <input name="injuries" placeholder="e.g. none, knee pain" value={formData.injuries} onChange={handleChange} className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none transition-colors" />
+            </div>
           </div>
 
           <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl mt-6 transition-all shadow-lg shadow-emerald-500/20 active:scale-[0.98]">
@@ -486,6 +527,14 @@ export default function App() {
       const profileContext = userProfile 
         ? `\n\n[USER PROFILE: Age ${userProfile.age}, Height ${userProfile.height}, Weight ${userProfile.weight}, Gender ${userProfile.gender}, Goal: "${userProfile.goal}", Activity: "${userProfile.activity}". Always personalize your advice using this profile.]` 
         : "";
+      const extendedProfileContext = userProfile
+        ? "\n\n[ADDITIONAL PROFILE: Units=" + userProfile.units +
+          ", Experience=" + userProfile.experience +
+          ', Equipment="' + userProfile.equipment +
+          '", Schedule="' + userProfile.schedule +
+          '", Dietary preferences="' + userProfile.dietaryPreferences +
+          '", Injuries or limitations="' + userProfile.injuries + '".]'
+        : "";
 
       // Enforce strict format for UI Workout Cards
       const secretPrompt = `\n\n[SYSTEM DIRECTIVE: Respond with a highly structured, professional format. Absolutely NO markdown tables. When generating workout plans, you MUST format each day exactly like this:\n### Day 1 - [Title]\n- Exercise 1\n- Exercise 2\nDo not use bolding or other characters around the 'Day' title. Be direct and authoritative.]` + profileContext;
@@ -494,7 +543,7 @@ export default function App() {
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
-          message: message + secretPrompt, 
+          message: message + secretPrompt + extendedProfileContext,
           history:baseMessages.slice(-10).map(m=>({ role:m.role, content:m.content }))
         })
       });

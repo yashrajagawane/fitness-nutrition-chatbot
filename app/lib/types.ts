@@ -21,6 +21,12 @@ export interface UserProfile {
   gender: string;
   goal: string;
   activity: string;
+  units: "metric" | "imperial";
+  experience: string;
+  equipment: string;
+  schedule: string;
+  dietaryPreferences: string;
+  injuries: string;
 }
 
 export interface ChatHistoryMessage {
