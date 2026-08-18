@@ -38,3 +38,20 @@ export interface ChatRequest {
   message: string;
   history?: ChatHistoryMessage[];
 }
+
+export interface SavedPlan {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: Date;
+}
+
+export interface ProgressEntry {
+  id: string;
+  date: string;
+  weight: string;
+  workouts: string;
+  water: string;
+  sleep: string;
+  note: string;
+}

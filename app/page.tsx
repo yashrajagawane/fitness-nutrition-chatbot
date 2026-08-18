@@ -25,8 +25,8 @@ import {
 } from "lucide-react";
 
 import ReactMarkdown from "react-markdown";
-import { loadProfile, loadSessions, saveProfile, saveSessions } from "./lib/storage";
-import type { ChatSession, Message, UserProfile } from "./lib/types";
+import { loadProfile, loadProgress, loadSavedPlans, loadSessions, saveProfile, saveProgress, saveSavedPlans, saveSessions } from "./lib/storage";
+import type { ChatSession, Message, ProgressEntry, SavedPlan, UserProfile } from "./lib/types";
 
 /* ---------------- TYPES & INTERFACES ---------------- */
 
@@ -42,7 +42,8 @@ const Sidebar = memo(
     isOpen,
     onClose,
     onOpen,
-    onOpenProfile
+    onOpenProfile,
+    onOpenDashboard
   }: {
     sessions: ChatSession[];
     activeSessionId: string | null;
@@ -53,6 +54,7 @@ const Sidebar = memo(
     onClose: () => void;
     onOpen: () => void;
     onOpenProfile: () => void;
+    onOpenDashboard: () => void;
   }) => {
     const recentSessions = [...sessions]
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -151,6 +153,15 @@ const Sidebar = memo(
 
           {/* Footer Profile Section */}
           <div className="p-4 border-t border-zinc-800 bg-zinc-900/20">
+            <button onClick={onOpenDashboard} className="mb-2 flex w-full items-center gap-3 rounded-xl p-2 text-left transition-colors hover:bg-zinc-800/50">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800 text-zinc-400">
+                <Activity size={18} />
+              </div>
+              <div className="flex flex-col">
+                <p className="text-xs font-bold text-zinc-200">Progress & Plans</p>
+                <p className="text-[9px] font-bold uppercase tracking-widest text-emerald-500">Track your journey</p>
+              </div>
+            </button>
             <div 
               onClick={onOpenProfile}
               className="flex items-center justify-between group cursor-pointer p-2 rounded-xl hover:bg-zinc-800/50 transition-colors"
@@ -181,6 +192,9 @@ const Sidebar = memo(
             <div className="mt-auto">
               <button onClick={onOpenProfile} className="text-zinc-400 hover:text-emerald-500 transition-colors" title="Edit Profile">
                 <User size={20} />
+              </button>
+              <button onClick={onOpenDashboard} className="ml-4 text-zinc-400 hover:text-emerald-500 transition-colors" title="Progress and Saved Plans">
+                <Activity size={20} />
               </button>
             </div>
           </div>
@@ -366,6 +380,101 @@ const ProfileModal = ({
   );
 };
 
+const DashboardModal = ({
+  plans,
+  progress,
+  onAddProgress,
+  onDeletePlan,
+  onClose,
+}: {
+  plans: SavedPlan[];
+  progress: ProgressEntry[];
+  onAddProgress: (entry: ProgressEntry) => void;
+  onDeletePlan: (id: string) => void;
+  onClose: () => void;
+}) => {
+  const [entry, setEntry] = useState<ProgressEntry>({
+    id: "",
+    date: new Date().toISOString().slice(0, 10),
+    weight: "",
+    workouts: "0",
+    water: "",
+    sleep: "",
+    note: "",
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setEntry({ ...entry, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onAddProgress({ ...entry, id: Date.now().toString() });
+    setEntry({ ...entry, id: "", note: "" });
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+      <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-800 bg-[#0c0c0e] p-6">
+          <div>
+            <h2 className="text-lg font-bold text-white">Progress & Saved Plans</h2>
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-widest text-zinc-500">Private browser-only tracking</p>
+          </div>
+          <button onClick={onClose} className="text-zinc-500 transition-colors hover:text-white" aria-label="Close dashboard">
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="grid gap-6 p-6 md:grid-cols-2">
+          <section>
+            <h3 className="mb-3 text-sm font-bold text-emerald-400">Log today’s progress</h3>
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <input required name="date" type="date" value={entry.date} onChange={handleChange} className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500" />
+              <div className="grid grid-cols-2 gap-3">
+                <input name="weight" placeholder="Weight" value={entry.weight} onChange={handleChange} className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500" />
+                <input name="workouts" type="number" min="0" max="20" placeholder="Workouts" value={entry.workouts} onChange={handleChange} className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500" />
+                <input name="water" placeholder="Water (glasses)" value={entry.water} onChange={handleChange} className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500" />
+                <input name="sleep" placeholder="Sleep (hours)" value={entry.sleep} onChange={handleChange} className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500" />
+              </div>
+              <textarea name="note" placeholder="How did it feel?" value={entry.note} onChange={handleChange} rows={3} className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-white outline-none focus:border-emerald-500" />
+              <button type="submit" className="w-full rounded-xl bg-emerald-600 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-700">Save Progress</button>
+            </form>
+
+            <div className="mt-5 space-y-2">
+              {progress.slice(-5).reverse().map((item) => (
+                <div key={item.id} className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-3 text-xs text-zinc-300">
+                  <div className="flex justify-between font-bold text-zinc-200"><span>{item.date}</span><span>{item.workouts} workouts</span></div>
+                  <p className="mt-1 text-zinc-500">{item.weight || "Weight not recorded"} · {item.water || "Water not recorded"} · {item.sleep || "Sleep not recorded"}</p>
+                  {item.note && <p className="mt-2 text-zinc-400">{item.note}</p>}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <h3 className="mb-3 text-sm font-bold text-emerald-400">Saved plans</h3>
+            {plans.length === 0 ? (
+              <p className="rounded-xl border border-dashed border-zinc-800 p-5 text-sm leading-6 text-zinc-500">Save a useful coach response to keep it here for later.</p>
+            ) : (
+              <div className="space-y-3">
+                {plans.map((plan) => (
+                  <details key={plan.id} className="group rounded-xl border border-zinc-800 bg-zinc-900/50 p-3">
+                    <summary className="cursor-pointer list-none text-sm font-bold text-zinc-200">{plan.title}</summary>
+                    <p className="mt-2 text-[10px] uppercase tracking-wider text-zinc-600">{plan.createdAt.toLocaleDateString()}</p>
+                    <div className="mt-3 whitespace-pre-wrap text-xs leading-5 text-zinc-400">{plan.content}</div>
+                    <button onClick={() => onDeletePlan(plan.id)} className="mt-3 text-[10px] font-bold uppercase tracking-wider text-red-400 hover:text-red-300">Remove</button>
+                  </details>
+                ))}
+              </div>
+            )}
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 /* ---------------- MAIN APP ---------------- */
 
 const SUGGESTIONS = [
@@ -388,6 +497,9 @@ export default function App() {
   // Profile State
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
+  const [savedPlans, setSavedPlans] = useState<SavedPlan[]>([]);
+  const [progress, setProgress] = useState<ProgressEntry[]>([]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -417,6 +529,8 @@ export default function App() {
     }else{
       createSession();
     }
+    setSavedPlans(loadSavedPlans());
+    setProgress(loadProgress());
   },[]);
 
   /* ---------- EFFECTS ---------- */
@@ -427,6 +541,11 @@ export default function App() {
     }
     messagesEndRef.current?.scrollIntoView({ behavior:"smooth", block:"end" });
   },[sessions]);
+
+  useEffect(() => {
+    saveSavedPlans(savedPlans);
+    saveProgress(progress);
+  }, [savedPlans, progress]);
 
   /* ---------- SESSION MGMT ---------- */
 
@@ -574,6 +693,22 @@ export default function App() {
     }
   };
 
+  const savePlan = (message: Message) => {
+    setSavedPlans((previous) => [
+      {
+        id: Date.now().toString(),
+        title: currentSession?.title || "Saved fitness plan",
+        content: message.content,
+        createdAt: new Date(),
+      },
+      ...previous,
+    ]);
+  };
+
+  const deletePlan = (id: string) => {
+    setSavedPlans((previous) => previous.filter((plan) => plan.id !== id));
+  };
+
   const retryLastMessage = () => {
     if (!lastUserMessage || loading || streaming) return;
     const messageIndex = messages.findIndex((message) => message.id === lastUserMessage.id);
@@ -658,6 +793,15 @@ export default function App() {
           if (userProfile) setShowProfileModal(false); // Only allow close if profile exists
         }} />
       )}
+      {showDashboard && (
+        <DashboardModal
+          plans={savedPlans}
+          progress={progress}
+          onAddProgress={(entry) => setProgress((previous) => [...previous, entry])}
+          onDeletePlan={deletePlan}
+          onClose={() => setShowDashboard(false)}
+        />
+      )}
 
       <Sidebar
         sessions={sessions}
@@ -669,6 +813,7 @@ export default function App() {
         onClose={()=>setSidebarOpen(false)}
         onOpen={()=>setSidebarOpen(true)}
         onOpenProfile={()=>setShowProfileModal(true)}
+        onOpenDashboard={()=>setShowDashboard(true)}
       />
 
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
@@ -720,6 +865,10 @@ export default function App() {
                       <button onClick={() => void copyMessage(m)} className="flex items-center gap-1.5 transition-colors hover:text-emerald-400" aria-label="Copy response">
                         <Copy size={13} />
                         {copiedMessageId === m.id ? "Copied" : "Copy"}
+                      </button>
+                      <button onClick={() => savePlan(m)} className="flex items-center gap-1.5 transition-colors hover:text-emerald-400" aria-label="Save plan">
+                        <Target size={13} />
+                        Save plan
                       </button>
                       {index === messages.length - 1 && lastUserMessage && (
                         <button onClick={retryLastMessage} disabled={loading || streaming} className="flex items-center gap-1.5 transition-colors hover:text-emerald-400 disabled:cursor-not-allowed disabled:opacity-40" aria-label="Regenerate response">

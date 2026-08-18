@@ -1,7 +1,9 @@
-import type { ChatSession, Message, UserProfile } from "./types";
+import type { ChatSession, Message, ProgressEntry, SavedPlan, UserProfile } from "./types";
 
 const PROFILE_KEY = "vitalis_profile";
 const SESSIONS_KEY = "vitalis_sessions";
+const SAVED_PLANS_KEY = "vitalis_saved_plans";
+const PROGRESS_KEY = "vitalis_progress";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null;
@@ -35,6 +37,20 @@ const parseSession = (value: unknown): ChatSession | null => {
     : [];
 
   return createdAt ? { id: value.id, title: value.title, createdAt, messages } : null;
+};
+
+const parseSavedPlan = (value: unknown): SavedPlan | null => {
+  if (!isRecord(value) || typeof value.id !== "string" || typeof value.title !== "string" || typeof value.content !== "string") {
+    return null;
+  }
+  const createdAt = parseDate(value.createdAt);
+  return createdAt ? { id: value.id, title: value.title, content: value.content, createdAt } : null;
+};
+
+const parseProgressEntry = (value: unknown): ProgressEntry | null => {
+  const fields = ["id", "date", "weight", "workouts", "water", "sleep", "note"] as const;
+  if (!isRecord(value) || fields.some((field) => typeof value[field] !== "string")) return null;
+  return Object.fromEntries(fields.map((field) => [field, value[field]])) as unknown as ProgressEntry;
 };
 
 export const loadProfile = (): UserProfile | null => {
@@ -87,4 +103,36 @@ export const saveProfile = (profile: UserProfile) => {
 
 export const saveSessions = (sessions: ChatSession[]) => {
   window.localStorage.setItem(SESSIONS_KEY, JSON.stringify(sessions));
+};
+
+export const loadSavedPlans = (): SavedPlan[] => {
+  try {
+    const raw = window.localStorage.getItem(SAVED_PLANS_KEY);
+    const value: unknown = raw ? JSON.parse(raw) : [];
+    return Array.isArray(value)
+      ? value.map(parseSavedPlan).filter((plan): plan is SavedPlan => plan !== null)
+      : [];
+  } catch {
+    return [];
+  }
+};
+
+export const saveSavedPlans = (plans: SavedPlan[]) => {
+  window.localStorage.setItem(SAVED_PLANS_KEY, JSON.stringify(plans));
+};
+
+export const loadProgress = (): ProgressEntry[] => {
+  try {
+    const raw = window.localStorage.getItem(PROGRESS_KEY);
+    const value: unknown = raw ? JSON.parse(raw) : [];
+    return Array.isArray(value)
+      ? value.map(parseProgressEntry).filter((entry): entry is ProgressEntry => entry !== null)
+      : [];
+  } catch {
+    return [];
+  }
+};
+
+export const saveProgress = (entries: ProgressEntry[]) => {
+  window.localStorage.setItem(PROGRESS_KEY, JSON.stringify(entries));
 };
