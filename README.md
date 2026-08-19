@@ -158,6 +158,13 @@ This ensures AI answers are **clean, readable, and well-organized** — not wall
 - Log workouts, weight, water, sleep, and notes in the Progress dashboard.
 - Keep this tracking data private in the browser during the current no-account phase.
 
+### 🔐 Data Portability and Privacy
+
+- Export profile, sessions, saved plans, and progress as a versioned JSON backup.
+- Import a compatible backup to restore browser data.
+- Delete all local data from the Progress dashboard with confirmation.
+- No account or external database is required for the current experience.
+
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
