@@ -1,6 +1,7 @@
 {
   "name": "AI Fitness Coach",
   "short_name": "Fitness Coach",
+  "id": "/",
   "description": "Personalized fitness and nutrition guidance powered by AI.",
   "start_url": "/",
   "scope": "/",
