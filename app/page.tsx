@@ -70,7 +70,7 @@ const Sidebar = memo(
         )}
 
         <aside
-          className={`fixed lg:relative inset-y-0 left-0 z-50 flex flex-col h-screen border-r border-zinc-800 
+          className={`fixed lg:relative inset-y-0 left-0 z-50 flex flex-col h-[100dvh] border-r border-zinc-800 
           bg-[#0c0c0e] transition-all duration-300 ease-in-out
           ${isOpen ? "w-72 translate-x-0" : "-translate-x-full lg:translate-x-0 lg:w-0 lg:hidden"}`}
         >
@@ -188,7 +188,7 @@ const Sidebar = memo(
 
         {/* Collapsed Sidebar (Desktop) */}
         {!isOpen && (
-          <div className="hidden lg:flex flex-col items-center h-screen w-16 py-5 gap-8 border-r border-zinc-800 bg-[#0c0c0e]">
+          <div className="hidden lg:flex flex-col items-center h-[100dvh] w-16 py-5 gap-8 border-r border-zinc-800 bg-[#0c0c0e]">
             <button onClick={onOpen} className="text-zinc-400 hover:text-white transition-colors" title="Open Sidebar">
               <Menu size={22} />
             </button>
@@ -625,6 +625,10 @@ export default function App() {
   /* ---------- INITIALIZATION ---------- */
 
   useEffect(()=>{
+    if (window.innerWidth < 1024) {
+      setSidebarOpen(false);
+    }
+
     const savedProfile = loadProfile();
     if (savedProfile) {
       setUserProfile(savedProfile);
@@ -947,7 +951,7 @@ export default function App() {
   /* ---------------- UI RENDER ---------------- */
 
   return(
-    <div className="flex h-screen bg-[#050505] text-zinc-100 overflow-hidden font-sans">
+    <div className="flex h-[100dvh] min-w-0 overflow-hidden bg-[#050505] font-sans text-zinc-100">
       
       {showProfileModal && (
         <ProfileModal profile={userProfile} onSave={handleSaveProfile} onOpenAuth={openAuth} onClose={() => {
@@ -981,21 +985,21 @@ export default function App() {
         onOpenDashboard={openDashboard}
       />
 
-      <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
+      <div className="flex min-w-0 flex-1 flex-col transition-all duration-300">
         {/* Navbar */}
-        <header className="flex items-center justify-between px-6 py-4 border-b border-zinc-900 bg-[#050505]/80 backdrop-blur-md z-10">
-          <div className="flex items-center gap-4">
+        <header className="z-10 flex items-center justify-between border-b border-zinc-900 bg-[#050505]/80 px-3 py-3 backdrop-blur-md sm:px-6 sm:py-4">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-4">
             {!sidebarOpen && (
               <button onClick={() => setSidebarOpen(true)} className="text-zinc-400 hover:text-white transition-colors lg:hidden">
                 <Menu size={20} />
               </button>
             )}
-            <p className="text-xs uppercase tracking-widest text-zinc-500 font-bold">
+            <p className="truncate text-[11px] font-bold uppercase tracking-widest text-zinc-500 sm:text-xs">
               {currentSession?.title || "AI Fitness Coach"}
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            <button onClick={openAuth} className="rounded-lg bg-emerald-600 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-emerald-500/20 transition-colors hover:bg-emerald-700">Sign in</button>
+          <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+            <button onClick={openAuth} className="rounded-lg bg-emerald-600 px-2.5 py-2 text-[11px] font-bold text-white shadow-lg shadow-emerald-500/20 transition-colors hover:bg-emerald-700 sm:px-3 sm:text-xs">Sign in</button>
             <Info size={18} className="text-zinc-600"/>
           </div>
         </header>
