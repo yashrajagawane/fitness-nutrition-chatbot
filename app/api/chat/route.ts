@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateChatRequest } from "@/app/lib/validation";
+import { checkRateLimit } from "@/app/lib/rate-limit";
 
 const AI_COACH_SYSTEM_PROMPT = `You are AI Fitness Coach, an evidence-informed fitness and nutrition coach.
 
@@ -53,6 +54,15 @@ export async function POST(req: Request) {
     }
 
     const { message, history = [] } = validation.data;
+    const forwardedFor = req.headers.get("x-forwarded-for");
+    const clientKey = forwardedFor?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "anonymous";
+    const rateLimit = checkRateLimit(clientKey);
+    if (!rateLimit.allowed) {
+      return jsonResponse(
+        { error: "Too many requests. Please wait before asking the coach again." },
+        429
+      );
+    }
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
@@ -128,7 +138,7 @@ export async function POST(req: Request) {
     return jsonResponse({
       reply,
       timestamp: new Date().toISOString(),
-    });
+    }, 200);
 
   } catch (error: unknown) {
     console.error("Vitalis API Route Error:", error);
