@@ -27,6 +27,7 @@ import {
 import ReactMarkdown from "react-markdown";
 import { clearAllData, exportData, importData, loadProfile, loadProgress, loadSavedPlans, loadSessions, saveProfile, saveProgress, saveSavedPlans, saveSessions } from "./lib/storage";
 import type { ChatSession, Message, ProgressEntry, SavedPlan, UserProfile } from "./lib/types";
+import { createSupabaseBrowserClient } from "./lib/supabase/client";
 
 /* ---------------- TYPES & INTERFACES ---------------- */
 
@@ -496,6 +497,84 @@ const DashboardModal = ({
   );
 };
 
+const AuthModal = ({ onClose }: { onClose: () => void }) => {
+  const supabase = useMemo(() => createSupabaseBrowserClient(), []);
+  const [mode, setMode] = useState<"sign-in" | "sign-up">("sign-in");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    if (!supabase) return;
+    void supabase.auth.getUser().then(({ data }) => setUserEmail(data.user?.email ?? null));
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserEmail(session?.user?.email ?? null);
+    });
+    return () => listener.subscription.unsubscribe();
+  }, [supabase]);
+
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!supabase) return;
+    setBusy(true);
+    setMessage(null);
+    const result = mode === "sign-in"
+      ? await supabase.auth.signInWithPassword({ email, password })
+      : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin } });
+    setBusy(false);
+    if (result.error) {
+      setMessage(result.error.message);
+    } else {
+      setMessage(mode === "sign-up" ? "Account created. Check your email if confirmation is enabled." : "Signed in successfully.");
+    }
+  };
+
+  const signOut = async () => {
+    if (!supabase) return;
+    await supabase.auth.signOut();
+    setMessage("Signed out.");
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+      <div className="w-full max-w-md rounded-3xl border border-zinc-800 bg-[#0c0c0e] p-6 shadow-2xl">
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h2 className="text-lg font-bold text-white">Your account</h2>
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-widest text-zinc-500">Supabase Auth</p>
+          </div>
+          <button onClick={onClose} className="text-zinc-500 transition-colors hover:text-white" aria-label="Close account">
+            <X size={20} />
+          </button>
+        </div>
+
+        {!supabase ? (
+          <p className="rounded-xl border border-amber-900/60 bg-amber-950/20 p-4 text-sm leading-6 text-amber-200">
+            Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY to the local or Vercel environment to enable accounts.
+          </p>
+        ) : userEmail ? (
+          <div className="space-y-4">
+            <p className="text-sm text-zinc-300">Signed in as <strong className="text-emerald-400">{userEmail}</strong>.</p>
+            <button onClick={signOut} className="w-full rounded-xl border border-zinc-700 py-3 text-sm font-bold text-zinc-200 transition-colors hover:border-red-500 hover:text-red-300">Sign out</button>
+          </div>
+        ) : (
+          <form onSubmit={submit} className="space-y-4">
+            <input required type="email" placeholder="Email address" value={email} onChange={(event) => setEmail(event.target.value)} className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-white outline-none focus:border-emerald-500" />
+            <input required minLength={6} type="password" placeholder="Password (6+ characters)" value={password} onChange={(event) => setPassword(event.target.value)} className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-white outline-none focus:border-emerald-500" />
+            {message && <p role="status" className="text-sm text-zinc-400">{message}</p>}
+            <button disabled={busy} type="submit" className="w-full rounded-xl bg-emerald-600 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-700 disabled:opacity-50">{busy ? "Working..." : mode === "sign-in" ? "Sign in" : "Create account"}</button>
+            <button type="button" onClick={() => setMode(mode === "sign-in" ? "sign-up" : "sign-in")} className="w-full text-xs font-bold text-zinc-500 hover:text-emerald-400">
+              {mode === "sign-in" ? "Need an account? Sign up" : "Already have an account? Sign in"}
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+};
+
 /* ---------------- MAIN APP ---------------- */
 
 const SUGGESTIONS = [
@@ -519,6 +598,7 @@ export default function App() {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [savedPlans, setSavedPlans] = useState<SavedPlan[]>([]);
   const [progress, setProgress] = useState<ProgressEntry[]>([]);
 
@@ -852,6 +932,7 @@ export default function App() {
           onClose={() => setShowDashboard(false)}
         />
       )}
+      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
 
       <Sidebar
         sessions={sessions}
@@ -879,7 +960,10 @@ export default function App() {
               {currentSession?.title || "AI Fitness Coach"}
             </p>
           </div>
-          <Info size={18} className="text-zinc-600"/>
+          <div className="flex items-center gap-4">
+            <button onClick={() => setShowAuthModal(true)} className="text-xs font-bold text-zinc-500 transition-colors hover:text-emerald-400">Account</button>
+            <Info size={18} className="text-zinc-600"/>
+          </div>
         </header>
 
         {/* Messages */}
