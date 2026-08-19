@@ -44,7 +44,6 @@ const Sidebar = memo(
     onClose,
     onOpen,
     onOpenProfile,
-    onOpenDashboard
   }: {
     sessions: ChatSession[];
     activeSessionId: string | null;
@@ -55,7 +54,6 @@ const Sidebar = memo(
     onClose: () => void;
     onOpen: () => void;
     onOpenProfile: () => void;
-    onOpenDashboard: () => void;
   }) => {
     const recentSessions = [...sessions]
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -154,15 +152,6 @@ const Sidebar = memo(
 
           {/* Footer Profile Section */}
           <div className="p-4 border-t border-zinc-800 bg-zinc-900/20">
-            <button onClick={onOpenDashboard} className="mb-2 flex w-full items-center gap-3 rounded-xl p-2 text-left transition-colors hover:bg-zinc-800/50">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800 text-zinc-400">
-                <Activity size={18} />
-              </div>
-              <div className="flex flex-col">
-                <p className="text-xs font-bold text-zinc-200">Progress & Plans</p>
-                <p className="text-[9px] font-bold uppercase tracking-widest text-emerald-500">Track your journey</p>
-              </div>
-            </button>
             <div 
               onClick={onOpenProfile}
               className="flex items-center justify-between group cursor-pointer p-2 rounded-xl hover:bg-zinc-800/50 transition-colors"
@@ -193,9 +182,6 @@ const Sidebar = memo(
             <div className="mt-auto">
               <button onClick={onOpenProfile} className="text-zinc-400 hover:text-emerald-500 transition-colors" title="Edit Profile">
                 <User size={20} />
-              </button>
-              <button onClick={onOpenDashboard} className="ml-4 text-zinc-400 hover:text-emerald-500 transition-colors" title="Progress and Saved Plans">
-                <Activity size={20} />
               </button>
             </div>
           </div>
@@ -249,11 +235,13 @@ const ProfileModal = ({
   onSave, 
   onClose,
   onOpenAuth,
+  onOpenDashboard,
 }: { 
   profile: UserProfile | null, 
   onSave: (p: UserProfile) => void, 
   onClose: () => void,
   onOpenAuth: () => void,
+  onOpenDashboard: () => void,
 }) => {
   const [formData, setFormData] = useState<UserProfile>(profile || {
     age: '', height: '', weight: '', gender: 'male', goal: 'fat loss', activity: 'moderate',
@@ -273,21 +261,25 @@ const ProfileModal = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
       <div className="max-h-[calc(100vh-2rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl animate-in fade-in zoom-in-95 duration-200 custom-scrollbar">
-        <div className="p-6 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/30">
-          <div className="flex items-center gap-3">
+        <div className="flex items-start justify-between gap-3 border-b border-zinc-800 bg-zinc-900/30 p-5 sm:p-6">
+          <div className="flex min-w-0 items-center gap-3">
             <div className="p-2 bg-emerald-900/30 rounded-xl">
               <Target size={20} className="text-emerald-400" />
             </div>
-            <div>
-              <h2 className="text-lg font-bold text-white">Fitness Profile</h2>
-              <p className="text-[11px] text-zinc-400 uppercase tracking-widest font-semibold mt-0.5">Personalize Your AI Coach</p>
+            <div className="min-w-0">
+              <h2 className="truncate text-lg font-bold text-white">Fitness Profile</h2>
+              <p className="mt-0.5 truncate text-[11px] font-semibold uppercase tracking-widest text-zinc-400">Personalize Your AI Coach</p>
             </div>
           </div>
-          {profile && (
-            <button onClick={onClose} className="text-zinc-500 hover:text-white transition-colors">
+          {profile && <div className="flex shrink-0 items-center gap-2">
+            <button onClick={onOpenDashboard} className="flex items-center gap-1.5 rounded-lg border border-zinc-700 px-2.5 py-2 text-[10px] font-bold text-zinc-300 transition-colors hover:border-emerald-500 hover:text-emerald-400" title="Progress and Saved Plans">
+              <Activity size={15} />
+              <span className="hidden sm:inline">Progress & Plans</span>
+            </button>
+            <button onClick={onClose} className="rounded-lg p-1.5 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-white" aria-label="Close profile">
               <X size={20} />
             </button>
-          )}
+          </div>}
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
@@ -948,7 +940,7 @@ export default function App() {
     <div className="flex h-screen bg-[#050505] text-zinc-100 overflow-hidden font-sans">
       
       {showProfileModal && (
-        <ProfileModal profile={userProfile} onSave={handleSaveProfile} onOpenAuth={openAuth} onClose={() => {
+        <ProfileModal profile={userProfile} onSave={handleSaveProfile} onOpenAuth={openAuth} onOpenDashboard={openDashboard} onClose={() => {
           if (userProfile) setShowProfileModal(false); // Only allow close if profile exists
         }} />
       )}
@@ -976,7 +968,6 @@ export default function App() {
         onClose={()=>setSidebarOpen(false)}
         onOpen={()=>setSidebarOpen(true)}
         onOpenProfile={openProfile}
-        onOpenDashboard={openDashboard}
       />
 
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
