@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: PWA Phase 4 — Mobile Install Experience
+## Current Phase: PWA Phase 5 — Connection-Aware Mobile UX
 
 Status: **Complete**
 
@@ -82,6 +82,31 @@ The following checks passed:
 3. Documentation and verification for the completed Phase 4 install experience
 
 The next step is testing the deployed PWA on an actual phone, including installation, reload behavior, offline fallback, and sign-in after reconnecting.
+
+### PWA Phase 5 Completed Work
+
+- Added a mobile-only offline status banner when the device loses connectivity.
+- Added a short reconnection confirmation when the device comes back online.
+- Explained that AI coaching and account features require an internet connection.
+- Kept the existing service-worker data boundary and backend behavior unchanged.
+- Preserved the desktop web experience without adding connection banners to desktop layouts.
+
+### PWA Phase 5 Verification
+
+The following checks passed:
+
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- `git diff --check`
+
+### PWA Phase 5 GitHub Commits
+
+1. `455d38e` — add mobile network status
+2. `05a2eea` — show reconnect feedback on mobile
+3. Documentation and verification for the completed Phase 5 connection-aware UX
+
+The next step is testing the deployed PWA on a real phone across install, offline fallback, reconnect, and authentication flows.
 
 ### PWA Phase 1 Completed Work
 
