@@ -247,11 +247,13 @@ const WorkoutCard = ({ title, exercisesString }: { title: string, exercisesStrin
 const ProfileModal = ({ 
   profile, 
   onSave, 
-  onClose 
+  onClose,
+  onOpenAuth,
 }: { 
   profile: UserProfile | null, 
   onSave: (p: UserProfile) => void, 
-  onClose: () => void 
+  onClose: () => void,
+  onOpenAuth: () => void,
 }) => {
   const [formData, setFormData] = useState<UserProfile>(profile || {
     age: '', height: '', weight: '', gender: 'male', goal: 'fat loss', activity: 'moderate',
@@ -270,7 +272,7 @@ const ProfileModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-      <div className="bg-[#0c0c0e] border border-zinc-800 rounded-3xl w-full max-w-md shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div className="max-h-[calc(100vh-2rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl animate-in fade-in zoom-in-95 duration-200 custom-scrollbar">
         <div className="p-6 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/30">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-emerald-900/30 rounded-xl">
@@ -374,6 +376,9 @@ const ProfileModal = ({
 
           <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl mt-6 transition-all shadow-lg shadow-emerald-500/20 active:scale-[0.98]">
             Save Profile & Start
+          </button>
+          <button type="button" onClick={onOpenAuth} className="w-full rounded-xl border border-zinc-800 py-3 text-sm font-bold text-zinc-300 transition-colors hover:border-emerald-500 hover:text-emerald-400">
+            Sign in or create an account
           </button>
         </form>
       </div>
@@ -916,7 +921,7 @@ export default function App() {
     <div className="flex h-screen bg-[#050505] text-zinc-100 overflow-hidden font-sans">
       
       {showProfileModal && (
-        <ProfileModal profile={userProfile} onSave={handleSaveProfile} onClose={() => {
+        <ProfileModal profile={userProfile} onSave={handleSaveProfile} onOpenAuth={() => setShowAuthModal(true)} onClose={() => {
           if (userProfile) setShowProfileModal(false); // Only allow close if profile exists
         }} />
       )}
