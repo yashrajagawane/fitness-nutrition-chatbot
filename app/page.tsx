@@ -260,15 +260,15 @@ const ProfileModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-      <div className="max-h-[calc(100vh-2rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl animate-in fade-in zoom-in-95 duration-200 custom-scrollbar">
+      <div className="max-h-[calc(100vh-2rem)] w-full max-w-2xl overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl animate-in fade-in zoom-in-95 duration-200 custom-scrollbar">
         <div className="flex items-start justify-between gap-3 border-b border-zinc-800 bg-zinc-900/30 p-5 sm:p-6">
           <div className="flex min-w-0 items-center gap-3">
             <div className="p-2 bg-emerald-900/30 rounded-xl">
               <Target size={20} className="text-emerald-400" />
             </div>
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <h2 className="truncate text-lg font-bold text-white">Fitness Profile</h2>
-              <p className="mt-0.5 truncate text-[11px] font-semibold uppercase tracking-widest text-zinc-400">Personalize Your AI Coach</p>
+              <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-widest text-zinc-400">Personalize Your AI Coach</p>
             </div>
           </div>
           {profile && <div className="flex shrink-0 items-center gap-2">
@@ -366,7 +366,7 @@ const ProfileModal = ({
             </div>
           </div>
 
-          <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl mt-6 transition-all shadow-lg shadow-emerald-500/20 active:scale-[0.98]">
+          <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl mt-6 transition-all shadow-lg shadow-emerald-500/20 active:scale-[0.98]">
             Save Profile & Start
           </button>
           <button type="button" onClick={onOpenAuth} className="w-full rounded-xl border border-zinc-800 py-3 text-sm font-bold text-zinc-300 transition-colors hover:border-emerald-500 hover:text-emerald-400">
