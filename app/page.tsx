@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 
 import ReactMarkdown from "react-markdown";
-import { loadProfile, loadProgress, loadSavedPlans, loadSessions, saveProfile, saveProgress, saveSavedPlans, saveSessions } from "./lib/storage";
+import { clearAllData, exportData, importData, loadProfile, loadProgress, loadSavedPlans, loadSessions, saveProfile, saveProgress, saveSavedPlans, saveSessions } from "./lib/storage";
 import type { ChatSession, Message, ProgressEntry, SavedPlan, UserProfile } from "./lib/types";
 
 /* ---------------- TYPES & INTERFACES ---------------- */
@@ -385,14 +385,21 @@ const DashboardModal = ({
   progress,
   onAddProgress,
   onDeletePlan,
+  onExport,
+  onImport,
+  onDeleteData,
   onClose,
 }: {
   plans: SavedPlan[];
   progress: ProgressEntry[];
   onAddProgress: (entry: ProgressEntry) => void;
   onDeletePlan: (id: string) => void;
+  onExport: () => void;
+  onImport: (file: File) => void;
+  onDeleteData: () => void;
   onClose: () => void;
 }) => {
+  const importInputRef = useRef<HTMLInputElement>(null);
   const [entry, setEntry] = useState<ProgressEntry>({
     id: "",
     date: new Date().toISOString().slice(0, 10),
@@ -470,6 +477,20 @@ const DashboardModal = ({
             )}
           </section>
         </div>
+        <section className="border-t border-zinc-800 p-6">
+          <h3 className="text-sm font-bold text-emerald-400">Privacy & data</h3>
+          <p className="mt-1 max-w-xl text-xs leading-5 text-zinc-500">Your profile, conversations, plans, and progress are stored only in this browser. Export a backup before clearing local data.</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button onClick={onExport} className="rounded-xl border border-zinc-700 px-3 py-2 text-xs font-bold text-zinc-300 transition-colors hover:border-emerald-500 hover:text-emerald-400">Export data</button>
+            <button onClick={() => importInputRef.current?.click()} className="rounded-xl border border-zinc-700 px-3 py-2 text-xs font-bold text-zinc-300 transition-colors hover:border-emerald-500 hover:text-emerald-400">Import data</button>
+            <button onClick={onDeleteData} className="rounded-xl border border-red-900/60 px-3 py-2 text-xs font-bold text-red-400 transition-colors hover:border-red-500 hover:text-red-300">Delete local data</button>
+            <input ref={importInputRef} type="file" accept="application/json,.json" className="hidden" onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (file) onImport(file);
+              event.target.value = "";
+            }} />
+          </div>
+        </section>
       </div>
     </div>
   );
@@ -709,6 +730,32 @@ export default function App() {
     setSavedPlans((previous) => previous.filter((plan) => plan.id !== id));
   };
 
+  const handleExportData = () => {
+    const blob = new Blob([exportData()], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "ai-fitness-coach-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImportData = async (file: File) => {
+    const imported = importData(await file.text());
+    if (!imported) {
+      setError("That backup could not be imported. Use a JSON backup exported by AI Fitness Coach.");
+      return;
+    }
+    window.location.reload();
+  };
+
+  const handleDeleteAllData = () => {
+    if (window.confirm("Delete your profile, conversations, saved plans, and progress from this browser? This cannot be undone.")) {
+      clearAllData();
+      window.location.reload();
+    }
+  };
+
   const retryLastMessage = () => {
     if (!lastUserMessage || loading || streaming) return;
     const messageIndex = messages.findIndex((message) => message.id === lastUserMessage.id);
@@ -799,6 +846,9 @@ export default function App() {
           progress={progress}
           onAddProgress={(entry) => setProgress((previous) => [...previous, entry])}
           onDeletePlan={deletePlan}
+          onExport={handleExportData}
+          onImport={handleImportData}
+          onDeleteData={handleDeleteAllData}
           onClose={() => setShowDashboard(false)}
         />
       )}
