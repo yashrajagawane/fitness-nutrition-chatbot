@@ -198,6 +198,15 @@ Production safeguards include standard browser security headers, chat request ra
 
 Run the deployment smoke check by setting DEPLOYMENT_URL to a local or deployed URL and running npm run smoke. The check validates the health response, service status, and request tracing header.
 
+### Supabase Setup
+
+1. Create a Supabase project.
+2. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY from the project Connect panel to your local or Vercel environment.
+3. Run supabase/schema.sql in the Supabase SQL Editor.
+4. Open the Account control in the app to sign up or sign in.
+
+The current release keeps browser storage as a fallback. Profile, saved-plan, and progress synchronization will be enabled in the next phase after authentication is configured.
+
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
