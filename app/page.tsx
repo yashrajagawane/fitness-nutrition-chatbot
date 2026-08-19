@@ -703,6 +703,13 @@ export default function App() {
     setShowAuthModal(true);
   };
 
+  const openNewConsultation = () => {
+    setShowProfileModal(false);
+    setShowDashboard(false);
+    setShowAuthModal(false);
+    createSession();
+  };
+
   /* ---------- REALISTIC STREAMING ---------- */
 
   const streamText = async(text:string, targetSessionId: string)=>{
@@ -962,7 +969,7 @@ export default function App() {
       <Sidebar
         sessions={sessions}
         activeSessionId={currentSessionId}
-        onNewChat={createSession}
+        onNewChat={openNewConsultation}
         onSelectChat={setCurrentSessionId}
         onDeleteChat={deleteSession}
         isOpen={sidebarOpen}
