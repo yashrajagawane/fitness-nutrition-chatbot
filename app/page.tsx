@@ -886,7 +886,7 @@ export default function App() {
         <main className="flex-1 overflow-y-auto p-4 sm:p-8 custom-scrollbar">
           <div className="max-w-4xl mx-auto space-y-10">
             {error && (
-              <div role="alert" className="flex items-start justify-between gap-4 rounded-2xl border border-red-900/60 bg-red-950/30 px-4 py-3 text-sm text-red-200">
+              <div role="alert" aria-live="assertive" className="flex items-start justify-between gap-4 rounded-2xl border border-red-900/60 bg-red-950/30 px-4 py-3 text-sm text-red-200">
                 <div className="flex items-center gap-3">
                   <span>{error}</span>
                   {lastUserMessage && <button onClick={retryLastMessage} className="font-bold text-red-100 underline underline-offset-2 hover:text-white">Retry</button>}
@@ -934,7 +934,7 @@ export default function App() {
 
             {/* Realistic Typing Indicator (Only shows before streaming starts) */}
             {loading && !streaming && (
-              <div className="flex items-center gap-4 text-zinc-400 text-sm animate-in fade-in duration-300">
+              <div className="flex items-center gap-4 text-zinc-400 text-sm animate-in fade-in duration-300" role="status" aria-live="polite">
                 <div className="w-10 h-10 rounded-xl bg-zinc-900 flex items-center justify-center text-emerald-500 shadow-sm border border-zinc-800/80">
                   <Loader2 size={18} className="animate-spin"/>
                 </div>
