@@ -73,7 +73,7 @@ const Sidebar = memo(
           ${isOpen ? "w-72 translate-x-0" : "-translate-x-full lg:translate-x-0 lg:w-0 lg:hidden"}`}
         >
           {/* Header & Brand */}
-          <div className="p-4 border-b border-zinc-800 flex items-center justify-between">
+          <div className="px-4 py-3.5 border-b border-zinc-800 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-500/20 rotate-3">
                 <Activity size={20} />
