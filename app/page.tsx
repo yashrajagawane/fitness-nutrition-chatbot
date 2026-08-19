@@ -45,6 +45,7 @@ const Sidebar = memo(
     onClose,
     onOpen,
     onOpenProfile,
+    onOpenDashboard,
   }: {
     sessions: ChatSession[];
     activeSessionId: string | null;
@@ -55,6 +56,7 @@ const Sidebar = memo(
     onClose: () => void;
     onOpen: () => void;
     onOpenProfile: () => void;
+    onOpenDashboard: () => void;
   }) => {
     const recentSessions = [...sessions]
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -89,6 +91,14 @@ const Sidebar = memo(
               aria-label="Hide sidebar"
             >
               <PanelLeftClose size={19} />
+            </button>
+          </div>
+
+          {/* Progress shortcut */}
+          <div className="px-2 pt-2 pb-1">
+            <button onClick={onOpenDashboard} className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-600/15 px-3 py-2.5 text-xs font-bold text-emerald-300 transition-colors hover:border-emerald-400 hover:bg-emerald-600 hover:text-white">
+              <Activity size={16} />
+              Progress & Plans
             </button>
           </div>
 
@@ -241,13 +251,11 @@ const ProfileModal = ({
   onSave, 
   onClose,
   onOpenAuth,
-  onOpenDashboard,
 }: { 
   profile: UserProfile | null, 
   onSave: (p: UserProfile) => void, 
   onClose: () => void,
   onOpenAuth: () => void,
-  onOpenDashboard: () => void,
 }) => {
   const [formData, setFormData] = useState<UserProfile>(profile || {
     age: '', height: '', weight: '', gender: 'male', goal: 'fat loss', activity: 'moderate',
@@ -278,10 +286,6 @@ const ProfileModal = ({
             </div>
           </div>
           {profile && <div className="flex shrink-0 items-center gap-2">
-            <button onClick={onOpenDashboard} className="flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-600/15 px-4 py-2.5 text-xs font-bold text-emerald-300 transition-colors hover:border-emerald-400 hover:bg-emerald-600 hover:text-white" title="Progress and Saved Plans">
-              <Activity size={17} />
-              <span className="hidden sm:inline">Progress & Plans</span>
-            </button>
             <button onClick={onClose} className="rounded-lg p-1.5 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-white" aria-label="Close profile">
               <X size={20} />
             </button>
@@ -946,7 +950,7 @@ export default function App() {
     <div className="flex h-screen bg-[#050505] text-zinc-100 overflow-hidden font-sans">
       
       {showProfileModal && (
-        <ProfileModal profile={userProfile} onSave={handleSaveProfile} onOpenAuth={openAuth} onOpenDashboard={openDashboard} onClose={() => {
+        <ProfileModal profile={userProfile} onSave={handleSaveProfile} onOpenAuth={openAuth} onClose={() => {
           if (userProfile) setShowProfileModal(false); // Only allow close if profile exists
         }} />
       )}
@@ -974,6 +978,7 @@ export default function App() {
         onClose={()=>setSidebarOpen(false)}
         onOpen={()=>setSidebarOpen(true)}
         onOpenProfile={openProfile}
+        onOpenDashboard={openDashboard}
       />
 
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
