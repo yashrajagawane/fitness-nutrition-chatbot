@@ -260,7 +260,7 @@ const ProfileModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-      <div className="max-h-[calc(100vh-2rem)] w-full max-w-2xl overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl animate-in fade-in zoom-in-95 duration-200 custom-scrollbar">
+      <div className="mx-auto max-h-[calc(100vh-2rem)] w-full max-w-2xl overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl animate-in fade-in zoom-in-95 duration-200 custom-scrollbar">
         <div className="flex items-start justify-between gap-3 border-b border-zinc-800 bg-zinc-900/30 p-5 sm:p-6">
           <div className="flex min-w-0 items-center gap-3">
             <div className="p-2 bg-emerald-900/30 rounded-xl">
@@ -272,8 +272,8 @@ const ProfileModal = ({
             </div>
           </div>
           {profile && <div className="flex shrink-0 items-center gap-2">
-            <button onClick={onOpenDashboard} className="flex items-center gap-1.5 rounded-lg border border-zinc-700 px-2.5 py-2 text-[10px] font-bold text-zinc-300 transition-colors hover:border-emerald-500 hover:text-emerald-400" title="Progress and Saved Plans">
-              <Activity size={15} />
+            <button onClick={onOpenDashboard} className="flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-600/15 px-4 py-2.5 text-xs font-bold text-emerald-300 transition-colors hover:border-emerald-400 hover:bg-emerald-600 hover:text-white" title="Progress and Saved Plans">
+              <Activity size={17} />
               <span className="hidden sm:inline">Progress & Plans</span>
             </button>
             <button onClick={onClose} className="rounded-lg p-1.5 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-white" aria-label="Close profile">
@@ -420,7 +420,7 @@ const DashboardModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-      <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl">
+      <div className="mx-auto max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl">
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-800 bg-[#0c0c0e] p-6">
           <div>
             <h2 className="text-lg font-bold text-white">Progress & Saved Plans</h2>
