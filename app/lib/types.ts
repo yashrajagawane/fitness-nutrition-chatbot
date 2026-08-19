@@ -55,3 +55,12 @@ export interface ProgressEntry {
   sleep: string;
   note: string;
 }
+
+export interface AppDataBundle {
+  version: 1;
+  exportedAt: string;
+  profile: UserProfile | null;
+  sessions: ChatSession[];
+  savedPlans: SavedPlan[];
+  progress: ProgressEntry[];
+}

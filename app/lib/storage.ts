@@ -1,4 +1,4 @@
-import type { ChatSession, Message, ProgressEntry, SavedPlan, UserProfile } from "./types";
+import type { AppDataBundle, ChatSession, Message, ProgressEntry, SavedPlan, UserProfile } from "./types";
 
 const PROFILE_KEY = "vitalis_profile";
 const SESSIONS_KEY = "vitalis_sessions";
@@ -135,4 +135,69 @@ export const loadProgress = (): ProgressEntry[] => {
 
 export const saveProgress = (entries: ProgressEntry[]) => {
   window.localStorage.setItem(PROGRESS_KEY, JSON.stringify(entries));
+};
+
+export const getDataBundle = (): AppDataBundle => ({
+  version: 1,
+  exportedAt: new Date().toISOString(),
+  profile: loadProfile(),
+  sessions: loadSessions(),
+  savedPlans: loadSavedPlans(),
+  progress: loadProgress(),
+});
+
+export const exportData = (): string => JSON.stringify(getDataBundle(), null, 2);
+
+export const importData = (raw: string): boolean => {
+  try {
+    const value: unknown = JSON.parse(raw);
+    if (!isRecord(value) || value.version !== 1) return false;
+
+    const profile = value.profile === null ? null : loadImportedProfile(value.profile);
+    const sessions = Array.isArray(value.sessions)
+      ? value.sessions.map(parseSession).filter((session): session is ChatSession => session !== null)
+      : [];
+    const savedPlans = Array.isArray(value.savedPlans)
+      ? value.savedPlans.map(parseSavedPlan).filter((plan): plan is SavedPlan => plan !== null)
+      : [];
+    const progress = Array.isArray(value.progress)
+      ? value.progress.map(parseProgressEntry).filter((entry): entry is ProgressEntry => entry !== null)
+      : [];
+
+    if (value.profile !== null && !profile) return false;
+    if (!Array.isArray(value.sessions) || !Array.isArray(value.savedPlans) || !Array.isArray(value.progress)) return false;
+
+    if (profile) saveProfile(profile);
+    else window.localStorage.removeItem(PROFILE_KEY);
+    saveSessions(sessions);
+    saveSavedPlans(savedPlans);
+    saveProgress(progress);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+const loadImportedProfile = (value: unknown): UserProfile | null => {
+  if (!isRecord(value)) return null;
+  const requiredFields = ["age", "height", "weight", "gender", "goal", "activity"] as const;
+  if (requiredFields.some((field) => typeof value[field] !== "string")) return null;
+  return {
+    age: value.age as string,
+    height: value.height as string,
+    weight: value.weight as string,
+    gender: value.gender as string,
+    goal: value.goal as string,
+    activity: value.activity as string,
+    units: value.units === "imperial" ? "imperial" : "metric",
+    experience: typeof value.experience === "string" ? value.experience : "beginner",
+    equipment: typeof value.equipment === "string" ? value.equipment : "bodyweight and basic gym equipment",
+    schedule: typeof value.schedule === "string" ? value.schedule : "3 days per week",
+    dietaryPreferences: typeof value.dietaryPreferences === "string" ? value.dietaryPreferences : "none",
+    injuries: typeof value.injuries === "string" ? value.injuries : "none",
+  };
+};
+
+export const clearAllData = () => {
+  [PROFILE_KEY, SESSIONS_KEY, SAVED_PLANS_KEY, PROGRESS_KEY].forEach((key) => window.localStorage.removeItem(key));
 };
