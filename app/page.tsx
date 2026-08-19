@@ -96,7 +96,7 @@ const Sidebar = memo(
 
           {/* Progress shortcut */}
           <div className="px-2 pt-2 pb-1">
-            <button onClick={onOpenDashboard} className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-600/15 px-3 py-2.5 text-xs font-bold text-emerald-300 transition-colors hover:border-emerald-400 hover:bg-emerald-600 hover:text-white">
+            <button onClick={onOpenDashboard} className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-600/15 px-3 py-3 text-xs font-bold text-emerald-300 transition-colors hover:border-emerald-400 hover:bg-emerald-600 hover:text-white">
               <Activity size={16} />
               Progress & Plans
             </button>
