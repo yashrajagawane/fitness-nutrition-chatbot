@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: PWA Phase 3 — Offline Foundation
+## Current Phase: PWA Phase 4 — Mobile Install Experience
 
 Status: **Complete**
 
@@ -57,6 +57,31 @@ The following checks passed:
 3. Documentation and verification for the completed Phase 3 offline foundation
 
 The next step is testing installation and offline behavior on a deployed HTTPS build, followed by mobile-specific polish.
+
+### PWA Phase 4 Completed Work
+
+- Added a mobile-only install prompt using the browser's supported PWA install event.
+- Added a clear install action and a persistent dismiss option for users who are not ready to install.
+- Kept the prompt out of desktop layouts and out of browsers that do not support installation.
+- Added a stable manifest application ID for consistent installed-app identity.
+- Preserved the existing browser experience and authentication flow.
+
+### PWA Phase 4 Verification
+
+The following checks passed:
+
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- `git diff --check`
+
+### PWA Phase 4 GitHub Commits
+
+1. `bfff89e` — add mobile PWA install prompt
+2. `e628cc0` — integrate mobile install experience
+3. Documentation and verification for the completed Phase 4 install experience
+
+The next step is testing the deployed PWA on an actual phone, including installation, reload behavior, offline fallback, and sign-in after reconnecting.
 
 ### PWA Phase 1 Completed Work
 
