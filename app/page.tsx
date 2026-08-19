@@ -21,7 +21,8 @@ import {
   ChevronRight,
   Target,
   Copy,
-  RefreshCw
+  RefreshCw,
+  PanelLeftClose
 } from "lucide-react";
 
 import ReactMarkdown from "react-markdown";
@@ -81,8 +82,13 @@ const Sidebar = memo(
                 <span className="font-bold text-sm tracking-tight text-white">AI Fitness Coach</span>
               </div>
             </div>
-            <button className="text-zinc-400 hover:text-white lg:hidden" onClick={onClose}>
-              <X size={20} />
+            <button
+              className="rounded-lg p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+              onClick={onClose}
+              title="Hide sidebar"
+              aria-label="Hide sidebar"
+            >
+              <PanelLeftClose size={19} />
             </button>
           </div>
 
