@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: Phase 3 — Data Ownership and Portability Foundation
+## Current Phase: Phase 4 — Production Hardening
 
 Status: **Complete**
 
@@ -117,3 +117,31 @@ Phase 3 is represented by three commits on main:
 ### Next Phase
 
 The next step is provider-backed authentication and database persistence, with server-side ownership checks, cross-device sync, account deletion, and migration from the local data bundle.
+
+## Phase 4 Completed Work
+
+- Added per-client in-memory API rate limiting for chat requests.
+- Added a non-sensitive health endpoint at /api/health for deployment checks.
+- Added security headers for content sniffing, framing, referrer policy, and browser permissions.
+- Added predictable loading, not-found, and robots responses.
+- Added live-region semantics for chat loading and error feedback.
+
+### Phase 4 Verification
+
+The following checks passed during implementation:
+
+- npm run lint
+- npm run typecheck
+- npm run build
+
+### Phase 4 GitHub Commits
+
+Phase 4 is represented by three commits on main:
+
+1. feat: harden phase 4 api deployment
+2. feat: add phase 4 resilience states
+3. chore: complete phase 4 documentation and verification
+
+### Next Phase
+
+The next step is provider-backed authentication and database persistence, followed by production observability and automated end-to-end testing.

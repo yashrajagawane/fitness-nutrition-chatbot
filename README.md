@@ -194,6 +194,8 @@ This ensures AI answers are **clean, readable, and well-organized** — not wall
 |:---:|:---|
 | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) | Hosting and CI/CD pipeline directly from GitHub |
 
+Production safeguards include standard browser security headers, chat request rate limiting, and a no-store health check at /api/health.
+
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
