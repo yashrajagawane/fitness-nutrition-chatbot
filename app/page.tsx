@@ -273,9 +273,9 @@ const ProfileModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-2 backdrop-blur-sm sm:p-4">
       <div className="mx-auto max-h-[calc(100vh-2rem)] w-full max-w-2xl overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl animate-in fade-in zoom-in-95 duration-200 custom-scrollbar">
-        <div className="flex items-start justify-between gap-3 border-b border-zinc-800 bg-zinc-900/30 p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-3 border-b border-zinc-800 bg-zinc-900/30 p-4 sm:p-6">
           <div className="flex min-w-0 items-center gap-3">
             <div className="p-2 bg-emerald-900/30 rounded-xl">
               <Target size={20} className="text-emerald-400" />
@@ -292,7 +292,7 @@ const ProfileModal = ({
           </div>}
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 p-4 sm:p-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <label className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider pl-1">Age</label>
@@ -429,7 +429,7 @@ const DashboardModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-2 backdrop-blur-sm sm:p-4">
       <div className="mx-auto max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-zinc-800 bg-[#0c0c0e] shadow-2xl">
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-800 bg-[#0c0c0e] p-6">
           <div>
@@ -441,7 +441,7 @@ const DashboardModal = ({
           </button>
         </div>
 
-        <div className="grid gap-6 p-6 md:grid-cols-2">
+        <div className="grid gap-5 p-4 sm:gap-6 sm:p-6 md:grid-cols-2">
           <section>
             <h3 className="mb-3 text-sm font-bold text-emerald-400">Log today’s progress</h3>
             <form onSubmit={handleSubmit} className="space-y-3">
@@ -547,7 +547,7 @@ const AuthModal = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-2 backdrop-blur-sm sm:p-4">
       <div className="w-full max-w-md rounded-3xl border border-zinc-800 bg-[#0c0c0e] p-6 shadow-2xl">
         <div className="mb-6 flex items-center justify-between">
           <div>
@@ -1005,7 +1005,7 @@ export default function App() {
         </header>
 
         {/* Messages */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-8 custom-scrollbar">
+        <main className="flex-1 overflow-y-auto p-3 sm:p-8 custom-scrollbar">
           <div className="max-w-4xl mx-auto space-y-10">
             {error && (
               <div role="alert" aria-live="assertive" className="flex items-start justify-between gap-4 rounded-2xl border border-red-900/60 bg-red-950/30 px-4 py-3 text-sm text-red-200">
@@ -1019,21 +1019,21 @@ export default function App() {
               </div>
             )}
             {messages.map((m, index)=>(
-              <div key={m.id} className={`flex gap-4 ${m.role==="user"?"flex-row-reverse":""}`}>
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg ${
+              <div key={m.id} className={`flex gap-2 sm:gap-4 ${m.role==="user"?"flex-row-reverse":""}`}>
+                <div className={`h-8 w-8 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg sm:h-10 sm:w-10 ${
                   m.role === "user" ? "bg-zinc-800 text-white" : "bg-emerald-600 text-white shadow-emerald-500/20"
                 }`}>
                   {m.role==="user" ? <User size={18}/> : <Dumbbell size={18} />}
                 </div>
 
-                <div className={`px-6 py-5 rounded-3xl max-w-[95%] sm:max-w-[85%] text-[15px] min-w-0 shadow-md ${
+                <div className={`min-w-0 max-w-[95%] rounded-3xl px-4 py-4 text-sm shadow-md sm:max-w-[85%] sm:px-6 sm:py-5 sm:text-[15px] ${
                   m.role==="user"
                     ?"bg-emerald-600 text-white rounded-tr-none"
                     :"bg-[#0f0f11] border border-zinc-800/80 rounded-tl-none"
                 }`}>
                   {renderMessageContent(m.content)}
                   {m.role === "assistant" && m.content && (
-                    <div className="mt-4 flex items-center gap-3 border-t border-zinc-800/70 pt-3 text-[11px] font-bold uppercase tracking-wider text-zinc-500">
+                    <div className="mt-4 flex flex-wrap items-center gap-3 border-t border-zinc-800/70 pt-3 text-[11px] font-bold uppercase tracking-wider text-zinc-500">
                       <button onClick={() => void copyMessage(m)} className="flex items-center gap-1.5 transition-colors hover:text-emerald-400" aria-label="Copy response">
                         <Copy size={13} />
                         {copiedMessageId === m.id ? "Copied" : "Copy"}
@@ -1074,7 +1074,7 @@ export default function App() {
         </main>
 
         {/* Input Area */}
-        <footer className="p-4 sm:p-6 border-t border-zinc-900 bg-[#050505] z-10">
+        <footer className="z-10 border-t border-zinc-900 bg-[#050505] p-3 sm:p-6">
           <div className="max-w-4xl mx-auto">
             {messages.length<3&&!loading&&!streaming&&(
               <div className="flex gap-2 mb-3 flex-wrap animate-in slide-in-from-bottom-2 duration-500">
@@ -1097,7 +1097,7 @@ export default function App() {
                 onChange={(e)=>setInput(e.target.value)}
                 onKeyDown={(e)=>{ if(e.key==="Enter"){ e.preventDefault(); sendMessage(); } }}
                 placeholder="Ask your coach for a workout plan or diet advice..."
-                className="flex-1 bg-[#0f0f11] border border-zinc-800 rounded-2xl pl-5 pr-14 py-4 outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner text-sm"
+                className="flex-1 rounded-2xl border border-zinc-800 bg-[#0f0f11] py-3 pl-4 pr-14 text-sm outline-none shadow-inner transition-all focus:ring-2 focus:ring-emerald-500/50 sm:py-4 sm:pl-5"
               />
               <button
                 onClick={()=>sendMessage()}
