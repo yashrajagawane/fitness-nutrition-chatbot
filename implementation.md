@@ -1,10 +1,33 @@
 # Implementation Status
 
-## Current Phase: Phase 6 — Supabase Authentication Foundation
+## Current Phase: PWA Phase 1 — Mobile Layout Foundation
 
 Status: **Complete**
 
-Completed on: 2026-08-17
+Completed on: 2026-08-20
+
+### PWA Phase 1 Completed Work
+
+- Added a mobile-first viewport-height shell using dynamic viewport units.
+- Made the sidebar collapse automatically on phone-sized screens while preserving the desktop sidebar.
+- Added compact mobile spacing for the header, chat messages, composer, and modal dialogs.
+- Added responsive message bubbles and wrapped assistant actions for narrow screens.
+- Added minimum-width and horizontal-overflow protection for phone layouts.
+- Preserved the existing desktop web application behavior.
+
+### PWA Phase 1 Verification
+
+The following checks passed:
+
+- `npm run lint`
+- `npm run build`
+- `git diff --check`
+
+### PWA Phase 1 GitHub Commits
+
+1. `7b30cdc` — add mobile responsive shell
+2. `e24548d` — optimize mobile chat and modal spacing
+3. Documentation and verification for the completed Phase 1 mobile foundation
 
 ### Phase 0 Completed Work
 
