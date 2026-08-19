@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: PWA Phase 5 — Connection-Aware Mobile UX
+## Current Phase: PWA Phase 6 — Phone Safe Areas and Touch UX
 
 Status: **Complete**
 
@@ -107,6 +107,30 @@ The following checks passed:
 3. Documentation and verification for the completed Phase 5 connection-aware UX
 
 The next step is testing the deployed PWA on a real phone across install, offline fallback, reconnect, and authentication flows.
+
+### PWA Phase 6 Completed Work
+
+- Enabled viewport safe-area support for phones with home indicators and display cutouts.
+- Added safe bottom padding to the chat composer so it is not covered by the phone system UI.
+- Increased the mobile send control to a comfortable touch target.
+- Preserved the desktop layout and existing chat behavior.
+
+### PWA Phase 6 Verification
+
+The following checks passed:
+
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- `git diff --check`
+
+### PWA Phase 6 GitHub Commits
+
+1. `8d5a8a5` — add mobile safe area utility
+2. `bd294bd` — protect mobile composer touch area
+3. Documentation and verification for the completed Phase 6 phone UX
+
+The next step is real-device acceptance testing on the deployed HTTPS app, including install, offline fallback, reconnect, and authentication.
 
 ### PWA Phase 1 Completed Work
 
