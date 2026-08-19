@@ -1074,7 +1074,7 @@ export default function App() {
         </main>
 
         {/* Input Area */}
-        <footer className="z-10 border-t border-zinc-900 bg-[#050505] p-3 sm:p-6">
+        <footer className="safe-area-bottom z-10 border-t border-zinc-900 bg-[#050505] p-3 sm:p-6">
           <div className="max-w-4xl mx-auto">
             {messages.length<3&&!loading&&!streaming&&(
               <div className="flex gap-2 mb-3 flex-wrap animate-in slide-in-from-bottom-2 duration-500">
@@ -1102,7 +1102,7 @@ export default function App() {
               <button
                 onClick={()=>sendMessage()}
                 disabled={!input.trim()||loading||streaming}
-                className="absolute right-2 top-2 bottom-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-800 disabled:text-zinc-600 text-white px-4 rounded-xl transition-all shadow-md flex items-center justify-center"
+                className="absolute right-2 top-2 bottom-2 min-h-11 min-w-11 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-800 disabled:text-zinc-600 text-white px-4 rounded-xl transition-all shadow-md flex items-center justify-center"
               >
                 <Send size={18}/>
               </button>
