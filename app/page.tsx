@@ -527,12 +527,14 @@ const AuthModal = ({ onClose }: { onClose: () => void }) => {
     setMessage(null);
     const result = mode === "sign-in"
       ? await supabase.auth.signInWithPassword({ email, password })
-      : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin } });
+      : await supabase.auth.signUp({ email, password });
     setBusy(false);
     if (result.error) {
       setMessage(result.error.message);
     } else {
-      setMessage(mode === "sign-up" ? "Account created. Check your email if confirmation is enabled." : "Signed in successfully.");
+      setMessage(mode === "sign-up"
+        ? result.data.session ? "Account created and signed in." : "Account created, but email confirmation is still enabled in Supabase."
+        : "Signed in successfully.");
     }
   };
 
@@ -681,6 +683,24 @@ export default function App() {
     setUserProfile(profile);
     saveProfile(profile);
     setShowProfileModal(false);
+  };
+
+  const openProfile = () => {
+    setShowAuthModal(false);
+    setShowDashboard(false);
+    setShowProfileModal(true);
+  };
+
+  const openDashboard = () => {
+    setShowAuthModal(false);
+    setShowProfileModal(false);
+    setShowDashboard(true);
+  };
+
+  const openAuth = () => {
+    setShowProfileModal(false);
+    setShowDashboard(false);
+    setShowAuthModal(true);
   };
 
   /* ---------- REALISTIC STREAMING ---------- */
@@ -921,7 +941,7 @@ export default function App() {
     <div className="flex h-screen bg-[#050505] text-zinc-100 overflow-hidden font-sans">
       
       {showProfileModal && (
-        <ProfileModal profile={userProfile} onSave={handleSaveProfile} onOpenAuth={() => setShowAuthModal(true)} onClose={() => {
+        <ProfileModal profile={userProfile} onSave={handleSaveProfile} onOpenAuth={openAuth} onClose={() => {
           if (userProfile) setShowProfileModal(false); // Only allow close if profile exists
         }} />
       )}
@@ -948,8 +968,8 @@ export default function App() {
         isOpen={sidebarOpen}
         onClose={()=>setSidebarOpen(false)}
         onOpen={()=>setSidebarOpen(true)}
-        onOpenProfile={()=>setShowProfileModal(true)}
-        onOpenDashboard={()=>setShowDashboard(true)}
+        onOpenProfile={openProfile}
+        onOpenDashboard={openDashboard}
       />
 
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
@@ -966,7 +986,7 @@ export default function App() {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <button onClick={() => setShowAuthModal(true)} className="text-xs font-bold text-zinc-500 transition-colors hover:text-emerald-400">Account</button>
+            <button onClick={openAuth} className="rounded-lg bg-emerald-600 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-emerald-500/20 transition-colors hover:bg-emerald-700">Sign in</button>
             <Info size={18} className="text-zinc-600"/>
           </div>
         </header>
