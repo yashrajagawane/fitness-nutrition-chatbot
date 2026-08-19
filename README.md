@@ -196,6 +196,8 @@ This ensures AI answers are **clean, readable, and well-organized** — not wall
 
 Production safeguards include standard browser security headers, chat request rate limiting, and a no-store health check at /api/health.
 
+Run the deployment smoke check by setting DEPLOYMENT_URL to a local or deployed URL and running npm run smoke. The check validates the health response, service status, and request tracing header.
+
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---

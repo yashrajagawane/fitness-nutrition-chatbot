@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: Phase 4 — Production Hardening
+## Current Phase: Phase 5 — Observability and Automated Deployment Checks
 
 Status: **Complete**
 
@@ -145,3 +145,33 @@ Phase 4 is represented by three commits on main:
 ### Next Phase
 
 The next step is provider-backed authentication and database persistence, followed by production observability and automated end-to-end testing.
+
+## Phase 5 Completed Work
+
+- Added request IDs to chat and health responses for tracing a request across deployment logs.
+- Added structured JSON API events for health checks, successful chats, upstream failures, empty model responses, and request failures.
+- Kept observability logs free of prompts, profile data, and API keys.
+- Added Gemini configuration visibility to the health payload without exposing the credential.
+- Added an npm smoke command that validates the deployed health endpoint, JSON status, and request ID.
+- Verified the smoke check against a clean local production server.
+
+### Phase 5 Verification
+
+The following checks passed during implementation:
+
+- npm run lint
+- npm run typecheck
+- npm run build
+- npm run smoke
+
+### Phase 5 GitHub Commits
+
+Phase 5 is represented by three commits on main:
+
+1. feat: add phase 5 observability foundation
+2. feat: add phase 5 deployment smoke check
+3. chore: complete phase 5 documentation and verification
+
+### Next Phase
+
+The next step is choosing and integrating a provider-backed authentication and database service, followed by server-side ownership checks, cross-device sync, and automated end-to-end tests.
