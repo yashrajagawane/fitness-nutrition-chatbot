@@ -73,7 +73,7 @@ const Sidebar = memo(
           ${isOpen ? "w-72 translate-x-0" : "-translate-x-full lg:translate-x-0 lg:w-0 lg:hidden"}`}
         >
           {/* Header & Brand */}
-          <div className="p-4 border-b border-zinc-800 flex items-center justify-between">
+          <div className="p-3 border-b border-zinc-800 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-500/20 rotate-3">
                 <Activity size={20} />
@@ -93,10 +93,10 @@ const Sidebar = memo(
           </div>
 
           {/* Primary Action */}
-          <div className="p-3">
+          <div className="p-2">
             <button
               onClick={onNewChat}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3.5 
+                         className="w-full flex items-center justify-center gap-2 px-4 py-3
                          bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl 
                          font-bold text-xs transition-all shadow-xl shadow-emerald-500/20 
                          active:scale-[0.98] group"
@@ -157,7 +157,7 @@ const Sidebar = memo(
           </div>
 
           {/* Footer Profile Section */}
-          <div className="p-3 border-t border-zinc-800 bg-zinc-900/20">
+          <div className="p-2 border-t border-zinc-800 bg-zinc-900/20">
             <div 
               onClick={onOpenProfile}
               className="flex items-center justify-between group cursor-pointer p-2 rounded-xl hover:bg-zinc-800/50 transition-colors"
