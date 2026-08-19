@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: PWA Phase 2 — Manifest and Branding
+## Current Phase: PWA Phase 3 — Offline Foundation
 
 Status: **Complete**
 
@@ -31,6 +31,32 @@ The following checks passed:
 3. Documentation and verification for the completed Phase 2 PWA foundation
 
 The next step is adding a carefully scoped service worker and offline fallback, while keeping authentication and AI requests network-only.
+
+### PWA Phase 3 Completed Work
+
+- Added a production service worker for the safe application shell and static assets.
+- Added an offline fallback page with a clear retry action.
+- Added network-first navigation so fresh deployments are preferred whenever the user is online.
+- Kept authentication, Supabase, Gemini, API routes, and cross-origin requests network-only.
+- Added automatic service worker registration and safe update activation in production.
+
+### PWA Phase 3 Verification
+
+The following checks passed:
+
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- `node --check public/sw.js`
+- `git diff --check`
+
+### PWA Phase 3 GitHub Commits
+
+1. `8045f37` — add safe offline service worker
+2. `fb85d7a` — register PWA service worker
+3. Documentation and verification for the completed Phase 3 offline foundation
+
+The next step is testing installation and offline behavior on a deployed HTTPS build, followed by mobile-specific polish.
 
 ### PWA Phase 1 Completed Work
 
