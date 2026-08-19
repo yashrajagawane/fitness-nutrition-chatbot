@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-labelledby="title">
+  <title>AI Fitness Coach</title>
+  <rect width="192" height="192" rx="42" fill="#050505"/>
+  <rect x="24" y="24" width="144" height="144" rx="36" fill="#059669"/>
+  <path d="M48 100h22l11-34 18 62 13-40h20" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"/>
+</svg>
