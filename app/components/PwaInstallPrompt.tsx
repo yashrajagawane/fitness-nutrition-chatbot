@@ -9,9 +9,26 @@ interface BeforeInstallPromptEvent extends Event {
 
 const DISMISS_KEY = "fitness-coach-pwa-install-dismissed";
 
+const isIosInstallCandidate = () => {
+  if (typeof navigator === "undefined" || typeof window === "undefined") return false;
+
+  const isIosDevice = /iphone|ipad|ipod/i.test(navigator.userAgent)
+    || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isStandalone = window.matchMedia("(display-mode: standalone)").matches
+    || Boolean((navigator as Navigator & { standalone?: boolean }).standalone);
+
+  return isIosDevice && !isStandalone;
+};
+
+const shouldShowIosPrompt = () =>
+  isIosInstallCandidate()
+  && typeof window !== "undefined"
+  && window.localStorage.getItem(DISMISS_KEY) !== "true";
+
 export function PwaInstallPrompt() {
   const [installEvent, setInstallEvent] = useState<BeforeInstallPromptEvent | null>(null);
-  const [visible, setVisible] = useState(false);
+  const [isIos] = useState(isIosInstallCandidate);
+  const [visible, setVisible] = useState(shouldShowIosPrompt);
 
   useEffect(() => {
     if (window.matchMedia("(min-width: 641px)").matches) return;
@@ -27,7 +44,7 @@ export function PwaInstallPrompt() {
     return () => window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
   }, []);
 
-  if (!visible || !installEvent) return null;
+  if (!visible || (!installEvent && !isIos)) return null;
 
   const dismiss = () => {
     window.localStorage.setItem(DISMISS_KEY, "true");
@@ -35,8 +52,11 @@ export function PwaInstallPrompt() {
   };
 
   const install = async () => {
-    await installEvent.prompt();
-    const choice = await installEvent.userChoice;
+    if (!installEvent) return;
+
+    const pendingInstall = installEvent;
+    await pendingInstall.prompt();
+    const choice = await pendingInstall.userChoice;
     setInstallEvent(null);
     setVisible(false);
     if (choice.outcome === "dismissed") {
@@ -55,15 +75,19 @@ export function PwaInstallPrompt() {
         </div>
         <div className="min-w-0 flex-1">
           <p className="text-sm font-bold text-white">Install AI Fitness Coach</p>
-          <p className="mt-1 text-xs leading-5 text-zinc-400">Open your coach faster from your phone home screen.</p>
+          <p className="mt-1 text-xs leading-5 text-zinc-400">
+            {isIos ? "Tap Share, then Add to Home Screen." : "Open your coach faster from your phone home screen."}
+          </p>
         </div>
         <button onClick={dismiss} className="rounded-lg p-1 text-zinc-500 hover:bg-zinc-800 hover:text-white" aria-label="Dismiss install prompt">
           ×
         </button>
       </div>
-      <button onClick={install} className="mt-3 w-full rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-700">
-        Install app
-      </button>
+      {installEvent && (
+        <button onClick={install} className="mt-3 w-full rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-700">
+          Install app
+        </button>
+      )}
     </aside>
   );
 }

@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: PWA Phase 9 — Native Mobile Plan Sharing
+## Current Phase: PWA Phase 10 — iOS Installation Guidance
 
 Status: **Complete**
 
@@ -174,6 +174,26 @@ The following checks passed:
 ### PWA Phase 9 GitHub Commit
 
 1. `feat: add native sharing for saved plans` — single Phase 9 commit
+
+The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, and authentication.
+
+### PWA Phase 10 Completed Work
+
+- Added iPhone and iPad detection for the mobile install prompt.
+- Added simple Safari installation guidance: “Share → Add to Home Screen.”
+- Suppressed the guidance when the app is already installed in standalone mode.
+- Preserved the existing Android install prompt and desktop behavior.
+
+### PWA Phase 10 Verification
+
+The following checks passed:
+
+- `npm run verify`
+- `git diff --check`
+
+### PWA Phase 10 GitHub Commit
+
+1. `feat: add ios pwa install guidance` — single Phase 10 commit
 
 The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, and authentication.
 
