@@ -1020,13 +1020,8 @@ export default function App() {
 
       <div className="flex min-w-0 flex-1 flex-col transition-all duration-300">
         {/* Navbar */}
-        <header className="z-10 flex items-center justify-between border-b border-zinc-900 bg-[#050505]/80 px-3 py-3 backdrop-blur-md sm:px-6 sm:py-4">
+        <header className={`z-10 flex items-center justify-between border-b border-zinc-900 bg-[#050505]/80 px-3 py-3 backdrop-blur-md sm:px-6 sm:py-4 ${!sidebarOpen ? "pl-16" : ""}`}>
           <div className="flex min-w-0 items-center gap-2 sm:gap-4">
-            {!sidebarOpen && (
-              <button onClick={() => setSidebarOpen(true)} title="Show sidebar" aria-label="Show sidebar" className="text-zinc-400 hover:text-white transition-colors lg:hidden">
-                <Menu size={20} />
-              </button>
-            )}
             <p className="truncate text-[11px] font-bold uppercase tracking-widest text-zinc-500 sm:text-xs">
               {currentSession?.title || "AI Fitness Coach"}
             </p>

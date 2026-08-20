@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: Phase 11 — Mobile Shell and First-Visit Fixes
+## Current Phase: Phase 12 — Mobile Header Alignment
 
 Status: **Complete**
 
@@ -195,6 +195,26 @@ The following checks passed:
 ### Phase 11 GitHub Commit
 
 1. `fix: improve mobile shell and first visit`
+
+The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, sidebar access, and authentication.
+
+### Phase 12 Completed Work
+
+- Removed the duplicate mobile sidebar control from inside the header.
+- Reserved header space for the floating mobile sidebar button.
+- Prevented the chat title from sitting underneath the menu button.
+- Preserved desktop sidebar controls and the existing mobile navigation behavior.
+
+### Phase 12 Verification
+
+The following checks passed:
+
+- `npm run verify`
+- `git diff --check`
+
+### Phase 12 GitHub Commit
+
+1. `fix: align mobile sidebar button and header`
 
 The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, sidebar access, and authentication.
 
