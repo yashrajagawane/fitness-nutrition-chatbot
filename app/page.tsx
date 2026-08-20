@@ -22,7 +22,8 @@ import {
   Target,
   Copy,
   RefreshCw,
-  PanelLeftClose
+  PanelLeftClose,
+  Share2,
 } from "lucide-react";
 
 import ReactMarkdown from "react-markdown";
@@ -417,6 +418,23 @@ const DashboardModal = ({
     sleep: "",
     note: "",
   });
+  const [sharedPlanId, setSharedPlanId] = useState<string | null>(null);
+
+  const sharePlan = async (plan: SavedPlan) => {
+    const shareText = `${plan.title}\n\n${plan.content}`;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: plan.title, text: shareText });
+      } else {
+        await navigator.clipboard.writeText(shareText);
+      }
+      setSharedPlanId(plan.id);
+      window.setTimeout(() => setSharedPlanId(null), 1600);
+    } catch {
+      // Dismissed native share sheets should not show an application error.
+    }
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setEntry({ ...entry, [event.target.name]: event.target.value });
@@ -478,7 +496,13 @@ const DashboardModal = ({
                     <summary className="cursor-pointer list-none text-sm font-bold text-zinc-200">{plan.title}</summary>
                     <p className="mt-2 text-[10px] uppercase tracking-wider text-zinc-600">{plan.createdAt.toLocaleDateString()}</p>
                     <div className="mt-3 whitespace-pre-wrap text-xs leading-5 text-zinc-400">{plan.content}</div>
-                    <button onClick={() => onDeletePlan(plan.id)} className="mt-3 text-[10px] font-bold uppercase tracking-wider text-red-400 hover:text-red-300">Remove</button>
+                    <div className="mt-3 flex items-center gap-4">
+                      <button onClick={() => void sharePlan(plan)} className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-400 hover:text-emerald-300">
+                        <Share2 size={13} />
+                        {sharedPlanId === plan.id ? "Shared" : "Share / Copy"}
+                      </button>
+                      <button onClick={() => onDeletePlan(plan.id)} className="text-[10px] font-bold uppercase tracking-wider text-red-400 hover:text-red-300">Remove</button>
+                    </div>
                   </details>
                 ))}
               </div>
