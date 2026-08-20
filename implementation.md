@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: Phase 12 — Mobile Header Alignment
+## Current Phase: Phase 13 — Sidebar Button Sizing
 
 Status: **Complete**
 
@@ -195,6 +195,25 @@ The following checks passed:
 ### Phase 11 GitHub Commit
 
 1. `fix: improve mobile shell and first visit`
+
+The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, sidebar access, and authentication.
+
+### Phase 13 Completed Work
+
+- Reduced the mobile sidebar-open button from 44px to 40px in both height and width.
+- Kept the button comfortable to tap while giving the chat header more room.
+- Preserved the existing alignment and desktop behavior.
+
+### Phase 13 Verification
+
+The following checks passed:
+
+- `npm run verify`
+- `git diff --check`
+
+### Phase 13 GitHub Commit
+
+1. `fix: reduce mobile sidebar button size`
 
 The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, sidebar access, and authentication.
 

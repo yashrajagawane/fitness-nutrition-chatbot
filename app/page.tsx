@@ -1012,7 +1012,7 @@ export default function App() {
           onClick={() => setSidebarOpen(true)}
           title="Show sidebar"
           aria-label="Show sidebar"
-          className="fixed left-3 top-3 z-[60] flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-700 bg-[#111113]/95 text-zinc-300 shadow-xl backdrop-blur-md transition-colors hover:border-emerald-500 hover:text-white lg:hidden"
+          className="fixed left-3 top-3 z-[60] flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-700 bg-[#111113]/95 text-zinc-300 shadow-xl backdrop-blur-md transition-colors hover:border-emerald-500 hover:text-white lg:hidden"
         >
           <Menu size={21} />
         </button>
