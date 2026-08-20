@@ -990,7 +990,7 @@ export default function App() {
         <header className="z-10 flex items-center justify-between border-b border-zinc-900 bg-[#050505]/80 px-3 py-3 backdrop-blur-md sm:px-6 sm:py-4">
           <div className="flex min-w-0 items-center gap-2 sm:gap-4">
             {!sidebarOpen && (
-              <button onClick={() => setSidebarOpen(true)} className="text-zinc-400 hover:text-white transition-colors lg:hidden">
+              <button onClick={() => setSidebarOpen(true)} title="Show sidebar" aria-label="Show sidebar" className="text-zinc-400 hover:text-white transition-colors lg:hidden">
                 <Menu size={20} />
               </button>
             )}
@@ -1096,12 +1096,14 @@ export default function App() {
                 value={input}
                 onChange={(e)=>setInput(e.target.value)}
                 onKeyDown={(e)=>{ if(e.key==="Enter"){ e.preventDefault(); sendMessage(); } }}
+                enterKeyHint="send"
                 placeholder="Ask your coach for a workout plan or diet advice..."
                 className="flex-1 rounded-2xl border border-zinc-800 bg-[#0f0f11] py-3 pl-4 pr-14 text-sm outline-none shadow-inner transition-all focus:ring-2 focus:ring-emerald-500/50 sm:py-4 sm:pl-5"
               />
               <button
                 onClick={()=>sendMessage()}
                 disabled={!input.trim()||loading||streaming}
+                aria-label="Send message"
                 className="absolute right-2 top-2 bottom-2 min-h-11 min-w-11 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-800 disabled:text-zinc-600 text-white px-4 rounded-xl transition-all shadow-md flex items-center justify-center"
               >
                 <Send size={18}/>

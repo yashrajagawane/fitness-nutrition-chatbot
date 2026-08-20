@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: PWA Phase 7 — Automated PWA Readiness Checks
+## Current Phase: PWA Phase 8 — Mobile Accessibility Polish
 
 Status: **Complete**
 
@@ -154,6 +154,26 @@ The following checks passed:
 1. `6a49d83` — add PWA readiness verifier
 2. `fce7c92` — include PWA checks in verify
 3. Documentation and verification for the completed Phase 7 PWA checks
+
+The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, and authentication.
+
+### PWA Phase 8 Completed Work
+
+- Added accessible labels and titles to the mobile sidebar toggle.
+- Added an accessible label to the chat send control.
+- Added a phone keyboard send hint for the message input.
+- Preserved the existing visual design and desktop behavior.
+
+### PWA Phase 8 Verification
+
+The following checks passed:
+
+- `npm run verify`
+- `git diff --check`
+
+### PWA Phase 8 GitHub Commit
+
+1. `feat: polish mobile accessibility` — single Phase 8 commit
 
 The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, and authentication.
 
