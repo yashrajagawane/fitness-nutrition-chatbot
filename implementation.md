@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: PWA Phase 10 — iOS Installation Guidance
+## Current Phase: Phase 11 — Mobile Shell and First-Visit Fixes
 
 Status: **Complete**
 
@@ -176,6 +176,27 @@ The following checks passed:
 1. `feat: add native sharing for saved plans` — single Phase 9 commit
 
 The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, and authentication.
+
+### Phase 11 Completed Work
+
+- Removed the unreliable online-status popup that incorrectly reported offline state while the app was usable.
+- Added a persistent mobile sidebar-open button when the sidebar is hidden.
+- Changed first-time visitors to open the dashboard directly without forcing profile setup.
+- Made the profile modal closable before a profile is saved.
+- Preserved the existing PWA install prompt and desktop web behavior.
+
+### Phase 11 Verification
+
+The following checks passed:
+
+- `npm run verify`
+- `git diff --check`
+
+### Phase 11 GitHub Commit
+
+1. `fix: improve mobile shell and first visit`
+
+The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, sidebar access, and authentication.
 
 ### PWA Phase 10 Completed Work
 

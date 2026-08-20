@@ -286,11 +286,11 @@ const ProfileModal = ({
               <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-widest text-zinc-400">Personalize Your AI Coach</p>
             </div>
           </div>
-          {profile && <div className="flex shrink-0 items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <button onClick={onClose} className="rounded-lg p-1.5 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-white" aria-label="Close profile">
               <X size={20} />
             </button>
-          </div>}
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 p-4 sm:p-6">
@@ -656,8 +656,6 @@ export default function App() {
     const savedProfile = loadProfile();
     if (savedProfile) {
       setUserProfile(savedProfile);
-    } else {
-      setShowProfileModal(true); // Force onboarding if missing
     }
 
     const savedHistory = loadSessions();
@@ -1008,6 +1006,17 @@ export default function App() {
         onOpenProfile={openProfile}
         onOpenDashboard={openDashboard}
       />
+
+      {!sidebarOpen && (
+        <button
+          onClick={() => setSidebarOpen(true)}
+          title="Show sidebar"
+          aria-label="Show sidebar"
+          className="fixed left-3 top-3 z-[60] flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-700 bg-[#111113]/95 text-zinc-300 shadow-xl backdrop-blur-md transition-colors hover:border-emerald-500 hover:text-white lg:hidden"
+        >
+          <Menu size={21} />
+        </button>
+      )}
 
       <div className="flex min-w-0 flex-1 flex-col transition-all duration-300">
         {/* Navbar */}
