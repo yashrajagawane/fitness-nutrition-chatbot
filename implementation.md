@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: PWA Phase 6 — Phone Safe Areas and Touch UX
+## Current Phase: PWA Phase 7 — Automated PWA Readiness Checks
 
 Status: **Complete**
 
@@ -131,6 +131,31 @@ The following checks passed:
 3. Documentation and verification for the completed Phase 6 phone UX
 
 The next step is real-device acceptance testing on the deployed HTTPS app, including install, offline fallback, reconnect, and authentication.
+
+### PWA Phase 7 Completed Work
+
+- Added a dependency-free PWA readiness verifier at `scripts/verify-pwa.mjs`.
+- The verifier checks required PWA files, manifest install metadata, offline fallback wiring, and service-worker API bypass behavior.
+- Included the PWA verifier in the standard `npm run verify` command.
+- Made future changes fail early if core install or offline assets are missing.
+
+### PWA Phase 7 Verification
+
+The following checks passed:
+
+- `npm run pwa:verify`
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- `git diff --check`
+
+### PWA Phase 7 GitHub Commits
+
+1. `6a49d83` — add PWA readiness verifier
+2. `fce7c92` — include PWA checks in verify
+3. Documentation and verification for the completed Phase 7 PWA checks
+
+The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, and authentication.
 
 ### PWA Phase 1 Completed Work
 
