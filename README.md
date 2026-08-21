@@ -53,6 +53,7 @@
 <b>Progress &amp; Saved Plans</b><br/>
 <img src="screenshots/progress-and-saved-plans.png" width="700"/>
 </p>
+
 ### 📱 Mobile — PWA Experience
  
 <p align="center">
