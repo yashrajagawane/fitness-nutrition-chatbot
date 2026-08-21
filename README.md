@@ -55,14 +55,17 @@
 
 ### 📱 Mobile — PWA Experience
 
-<table>
+<table align="center">
 <tr>
-<td align="center" width="25%"><b>AI Coaching Chat</b><br/><img src="screenshots/mobile-ai-fitness-chat.png" width="200"/></td>
-<td align="center" width="25%"><b>Navigation Sidebar</b><br/><img src="screenshots/mobile-navigation-sidebar.png" width="200"/></td>
-<td align="center" width="25%"><b>5-Day Workout Plan</b><br/><img src="screenshots/mobile-5-day-workout-plan.png" width="200"/></td>
-<td align="center" width="25%"><b>Progress &amp; Saved Plans</b><br/><img src="screenshots/mobile-progress-and-saved-plans.png" width="200"/></td>
+<td align="center" width="50%"><b>AI Coaching Chat</b><br/><img src="screenshots/mobile-ai-fitness-chat.png" width="260"/></td>
+<td align="center" width="50%"><b>5-Day Workout Plan</b><br/><img src="screenshots/mobile-5-day-workout-plan.png" width="260"/></td>
+</tr>
+<tr>
+<td align="center" width="50%"><b>Navigation Sidebar</b><br/><img src="screenshots/mobile-navigation-sidebar.png" width="260"/></td>
+<td align="center" width="50%"><b>Progress &amp; Saved Plans</b><br/><img src="screenshots/mobile-progress-and-saved-plans.png" width="260"/></td>
 </tr>
 </table>
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
