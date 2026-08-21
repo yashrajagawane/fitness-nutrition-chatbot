@@ -1,338 +1,248 @@
 <a name="readme-top"></a>
+
 <div align="center">
-    
+
 # 🏋️ AI Fitness Coach
 
-### An intelligent AI-powered fitness and nutrition assistant that generates personalized workout plans, diet suggestions, and real-time coaching guidance.
+### An AI-powered fitness and nutrition coach for the browser and your phone home screen.
 
-<br/>
-
-[![Launch App](https://img.shields.io/badge/🚀%20Launch%20AI%20Fitness%20Coach-CLICK%20HERE-22c55e?style=for-the-badge)](https://fitness-nutrition-chatbot.vercel.app)
-
-<br/>
+[![Launch App](https://img.shields.io/badge/Launch%20AI%20Fitness%20Coach-22c55e?style=for-the-badge&logo=vercel&logoColor=white)](https://fitness-nutrition-chatbot.vercel.app)
 
 ![Next.js](https://img.shields.io/badge/Next.js-App%20Router-black?style=flat-square&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-Styling-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
-![Gemini](https://img.shields.io/badge/Gemini-AI%20Powered-4285F4?style=flat-square&logo=google&logoColor=white)
-![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Authentication-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+![PWA](https://img.shields.io/badge/PWA-Installable-5A0FC8?style=flat-square)
 
-**[📸 Preview](#-preview)** · **[⚡ Features](#-features)** · **[🛠 Tech Stack](#-tech-stack)** · **[🚀 Get Started](#-local-development)**
+**[Preview](#-preview)** · **[Features](#-features)** · **[Setup](#-local-development)** · **[PWA guide](#-phone-pwa-experience)**
 
 </div>
 
 ---
-
-## 📑 Table of Contents
-
-- [Preview](#-preview)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#️-architecture)
-- [Project Structure](#-project-structure)
-- [Local Development](#-local-development)
-- [AI Capabilities](#-ai-capabilities)
-- [Project Purpose](#-project-purpose)
-- [Future Improvements](#-future-improvements)
-- [Disclaimer](#️-disclaimer)
-- [Author](#-author)
-
----
-
 
 ## 📸 Preview
 
 <div align="center">
 
-**🧍 Fitness Profile Setup**
+### Mobile PWA chat
 
-![Profile UI](screenshots/profile.png)
+<img src="screenshots/mobile-pwa-chat.png" alt="AI Fitness Coach mobile PWA chat screen" width="320" />
 
-Age, height, weight, gender, goal, and activity level — feeds every AI recommendation
+Responsive phone layout with a compact composer, safe-area spacing, sharing, and sidebar navigation.
 
-**💬 Chat Interface**
+### Desktop chat workspace
 
-![Chat UI](screenshots/chat.png)
+![AI Fitness Coach desktop chat workspace](screenshots/chat.png)
 
-Responsive AI chat for fitness and nutrition questions
+### Fitness profile
 
-**💪 Workout Plan Generation**
+![Fitness profile editor](screenshots/profile.png)
 
-![Workout Plan](screenshots/workout.png)
+### Structured workout plan
 
-AI-generated plans render as structured visual cards, not plain text — sets and reps laid out like a real fitness app, not a generic chatbot reply.
+![AI-generated workout plan card](screenshots/workout.png)
 
 </div>
-
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
 ## ⚡ Features
 
-### 🧠 Personalized AI Fitness Coaching
+### 🧠 AI fitness and nutrition coaching
 
-The AI coach answers a wide range of fitness and nutrition queries, including:
+- Personalized workout, nutrition, recovery, and macro guidance.
+- Structured responses with summaries, action plans, and safety notes.
+- Fitness-domain guardrails and an educational health disclaimer.
+- Markdown rendering and structured workout cards for readable training plans.
 
-- **Personalized workout plans** tailored to your goal and fitness level
-- **Fat loss strategies** and caloric guidance
-- **Muscle gain programs** with progressive overload principles
-- **Nutrition recommendations** and macro calculations
-- **Training schedule planning** and recovery guidance
+### 📱 Phone-first PWA experience
 
-All responses are informed by the user's stored fitness profile for maximum relevance.
+- Works as a normal responsive website on desktop and mobile browsers.
+- Installable as a Progressive Web App on supported Android browsers.
+- iPhone and iPad users receive **Share → Add to Home Screen** guidance.
+- Standalone app metadata, portrait orientation, theme colour, and app icons.
+- Production service worker caches only safe application-shell and static assets.
+- Offline fallback page for navigation when there is no connection.
+- AI, authentication, Supabase, and API requests remain network-only.
 
----
+### 🎛 Responsive mobile interface
 
-### 🧍 User Fitness Profile Memory
+- Hideable mobile sidebar with a dedicated sidebar-open button.
+- Mobile header prevents chat-title overlap with the sidebar control.
+- Phone-safe bottom spacing so the composer is not hidden by system UI.
+- Touch-friendly send button and phone keyboard send hint.
+- Scrollable profile and Progress & Plans dialogs.
+- First-time visitors enter the dashboard directly; completing a profile is optional.
 
-Users can store and save their personal fitness data:
+### 👤 Profile, authentication, and privacy
 
-| Field | Description |
-|---|---|
-| Age | Used to calibrate intensity and recovery |
-| Height & Weight | For BMI and caloric calculations |
-| Gender | Influences hormonal and physiological recommendations |
-| Fitness Goal | Fat loss / Muscle gain / Maintenance |
-| Activity Level | Sedentary to Very Active |
+- Optional profile: age, height, weight, goal, activity, equipment, schedule, diet preferences, and limitations.
+- Saved profile details are included in the AI context for more relevant responses.
+- Simple Supabase email sign-up, sign-in, and sign-out flow when configured.
+- Browser storage keeps sessions, profiles, plans, and progress private by default.
+- Export/import JSON backup and delete local data controls.
 
-This information is automatically injected into every AI request to generate **truly personalized recommendations**.
+### 🗂 Consultations, plans, and progress
 
-The profile also supports preferred units, experience level, available equipment, weekly schedule, dietary preferences, and injury or limitation notes.
+- Create, switch, and delete consultation sessions.
+- Save useful coach responses as plans.
+- Share saved plans with the native phone share sheet, with clipboard fallback.
+- Log workouts, weight, water, sleep, and notes in Progress & Plans.
+- Copy responses, regenerate the latest answer, and retry failed messages.
 
----
+### 🛡 Reliability
 
-### 💪 Workout Plan UI Cards
-
-AI-generated workout plans are parsed and rendered as **structured visual workout cards** instead of raw Markdown text.
-
-```
-Day 1 — Chest & Triceps        Day 2 — Back & Biceps
-──────────────────────         ──────────────────────
-✔ Bench Press       4×10       ✔ Pull Ups           4×8
-✔ Incline DB Press  3×12       ✔ Lat Pulldown       3×12
-✔ Chest Fly         3×15       ✔ Barbell Deadlift   3×8
-✔ Tricep Pushdown   3×12       ✔ Hammer Curls       3×12
-```
-
-This makes the UI feel like a **dedicated fitness application** rather than a generic chatbot.
-
----
-
-### ⚡ Responsive AI Responses
-
-Responses are displayed with a responsive typing effect after the Gemini response is received, making the experience feel immediate and readable.
-
-This dramatically improves the feel of the application, making it responsive and interactive rather than waiting for a full response to load.
+- Request validation, rate limiting, request IDs, no-store API responses, and a health endpoint.
+- Automated PWA readiness checks validate manifest, icons, offline fallback, and service-worker safety boundaries.
 
 ---
 
-### 🗂 Multi-Session Chat Management
-
-Users can manage multiple independent consultation sessions:
-
-- **Create** new consultation sessions
-- **Switch** between existing sessions seamlessly
-- **Delete** individual chat histories
-
-Session data is stored persistently in **localStorage** — no backend database required.
-
-The chat also supports copying assistant responses, regenerating the latest answer, and retrying failed requests without manually re-entering the question.
-
----
-
-### 📝 Markdown Rendering
-
-The chatbot fully supports formatted AI responses including:
-
-- Headings and subheadings
-- Bullet points and numbered lists
-- Structured workout and diet plans
-- Bold and italic emphasis
-
-This ensures AI answers are **clean, readable, and well-organized** — not walls of plain text.
-
-### 📈 Saved Plans and Progress Tracking
-
-- Save useful coach responses for later reference.
-- Log workouts, weight, water, sleep, and notes in the Progress dashboard.
-- Keep this tracking data private in the browser during the current no-account phase.
-
-### 🔐 Data Portability and Privacy
-
-- Export profile, sessions, saved plans, and progress as a versioned JSON backup.
-- Import a compatible backup to restore browser data.
-- Delete all local data from the Progress dashboard with confirmation.
-- No account or external database is required for the current experience.
-
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
-
----
-
-## 🛠 Tech Stack
-
-### Frontend
+## 🛠 Tech stack
 
 | Technology | Purpose |
-|:---:|:---|
-| ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white) | App Router — Full-stack React framework |
-| ![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | UI component library |
-| ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | Utility-first styling |
-| ![React Markdown](https://img.shields.io/badge/React_Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white) | Formatted response rendering |
-| ![Lucide Icons](https://img.shields.io/badge/Lucide_Icons-F56565?style=for-the-badge&logo=lucide&logoColor=white) | Icon library |
-
-### Backend
-
-| Technology | Purpose |
-|:---:|:---|
-| ![Next.js API Routes](https://img.shields.io/badge/API_Routes-000000?style=for-the-badge&logo=next.js&logoColor=white) | Serverless backend handlers |
-| ![Google Gemini](https://img.shields.io/badge/Google_Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white) | Core AI model integration |
-
-### Deployment
-
-| Technology | Purpose |
-|:---:|:---|
-| ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) | Hosting and CI/CD pipeline directly from GitHub |
-
-Production safeguards include standard browser security headers, chat request rate limiting, and a no-store health check at /api/health.
-
-Run the deployment smoke check by setting DEPLOYMENT_URL to a local or deployed URL and running npm run smoke. The check validates the health response, service status, and request tracing header.
-
-### Supabase Setup
-
-1. Create a Supabase project.
-2. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY from the project Connect panel to your local or Vercel environment.
-3. Run supabase/schema.sql in the Supabase SQL Editor.
-4. Open the Account control in the app to sign up or sign in.
-
-The current release keeps browser storage as a fallback. Profile, saved-plan, and progress synchronization will be enabled in the next phase after authentication is configured.
-
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+| --- | --- |
+| Next.js 16 + App Router | Full-stack React application and API routes |
+| React 19 | Interactive UI |
+| Tailwind CSS | Responsive styling |
+| Google Gemini | AI coaching responses |
+| Supabase | Optional email authentication |
+| React Markdown + Lucide | Rich responses and UI icons |
+| Service Worker + Web Manifest | Installable PWA and offline fallback |
+| Vercel | Deployment and CI/CD |
 
 ---
+
 ## 🏗️ Architecture
 
 ```mermaid
 flowchart LR
-    U["Browser<br/>Chat UI + Profile (localStorage)"] -->|"POST /api/chat"| R["Next.js API Route<br/>app/api/chat/route.ts"]
-    R -->|"prompt + profile context"| G["Google Gemini API"]
-    G -->|"generated response"| R
-    R -->|"JSON response + UI typing effect"| U
-    U --> M["React Markdown /<br/>WorkoutCard renderer"]
+    U["Browser or installed PWA"] --> UI["Next.js chat UI"]
+    UI --> SW["Service worker\nSafe shell + static cache"]
+    UI -->|"POST /api/chat"| API["Next.js API route"]
+    API --> G["Google Gemini"]
+    UI -. optional auth .-> S["Supabase Auth"]
+    UI --> L["Browser local storage\nProfile, sessions, plans, progress"]
 ```
 
-There's no separate backend or database — the Next.js API route calls Gemini directly on each message and injects the saved fitness profile as context. Session and profile data live entirely in the browser's `localStorage`, with defensive parsing for corrupted or outdated stored data.
-
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+The service worker does not cache Gemini, Supabase, authentication, or API requests. This keeps private and live data network-only while still allowing a useful offline app shell.
 
 ---
 
-## 📂 Project Structure
+## 📂 Project structure
 
-```
+```text
 app/
 ├── api/
-│   └── chat/
-│       └── route.ts          # AI backend route — Gemini API integration
-└── page.tsx                  # Main chatbot UI
+│   ├── chat/                 # Gemini-backed coaching endpoint
+│   └── health/               # Deployment health endpoint
+├── components/               # PWA registration and install UI
+├── lib/                      # Storage, validation, Supabase helpers
+├── offline/                  # Offline fallback route
+├── layout.tsx                # Metadata, manifest, PWA wiring
+├── manifest.webmanifest      # Install metadata
+└── page.tsx                  # Main application UI
 
-screenshots/                   # Preview images used in this README
+public/
+├── icons/                    # PWA icons
+└── sw.js                     # Safe service worker
+
+scripts/
+├── health-check.mjs          # Deployment smoke check
+└── verify-pwa.mjs            # PWA readiness check
+
+screenshots/                  # README preview images
+supabase/schema.sql           # Supabase database schema
 ```
-
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
-## 🚀 Local Development
+## 🚀 Local development
 
-**1. Clone the repository**
-```bash
-git clone https://github.com/yashrajagawane/Fitness-Nutrition-Chatbot.git
-cd Fitness-Nutrition-Chatbot
-```
+### 1. Clone and install
 
-**2. Install dependencies**
 ```bash
+git clone https://github.com/yashrajagawane/fitness-nutrition-chatbot.git
+cd fitness-nutrition-chatbot
 npm install
 ```
 
-**3. Configure environment variables**
+### 2. Configure environment variables
 
-Create a `.env.local` file in the root directory:
+Create `.env.local` in the project root:
+
 ```env
-GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEY=your_google_gemini_api_key
+
+# Optional: enables Supabase email authentication
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
 ```
 
-Get your API key from [Google AI Studio](https://aistudio.google.com).
+Get a Gemini key from [Google AI Studio](https://aistudio.google.com). For Supabase authentication, create a project, add the two public values above, and run [`supabase/schema.sql`](supabase/schema.sql) in the Supabase SQL Editor.
 
-**4. Start the development server**
+### 3. Run the app
+
 ```bash
 npm run dev
 ```
 
-Run the full local verification suite before opening a pull request:
+Open [http://localhost:3000](http://localhost:3000).
+
+### 4. Verify before deployment
+
 ```bash
 npm run verify
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+This runs the PWA readiness check, ESLint, TypeScript typecheck, and production build.
 
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+### 5. Optional deployment smoke check
 
----
-
-## 🧠 AI Capabilities
-
-The AI fitness coach is capable of providing guidance on:
-
-- ✅ Personalized multi-day workout programs
-- ✅ Diet and meal recommendations
-- ✅ Fat loss and calorie deficit strategies
-- ✅ Muscle building and hypertrophy training
-- ✅ Recovery and rest day planning
-- ✅ Macro and micronutrient breakdown
-- ✅ Fitness goal planning and progress advice
-
-All responses are structured to resemble **professional fitness coaching advice** — not generic AI output.
-
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+```bash
+DEPLOYMENT_URL=https://your-deployment.vercel.app npm run smoke
+```
 
 ---
 
-## 🎯 Project Purpose
+## 📲 Phone PWA experience
 
-This project demonstrates how to build a **production-grade AI-powered web application** using modern full-stack technologies. Key concepts covered:
+### Android
 
-- Conversational UI design with chat session management
-- AI model integration via serverless API routes
-- Responsive response presentation for better UX
-- Structured data rendering from AI output (workout cards)
-- User profile context injection into AI prompts
+When the browser offers installation, use the in-app **Install app** prompt. It may not appear immediately because browser installation rules apply; it also stays hidden after dismissal or when the app is already installed.
 
-It serves as a **portfolio-level project** that showcases practical AI integration, thoughtful UI/UX design, and full-stack engineering skills.
+### iPhone and iPad
 
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+Open the app in Safari, tap **Share**, then choose **Add to Home Screen**. The app displays this guidance automatically on eligible iOS and iPadOS browsers.
+
+### Offline behaviour
+
+The application shell and static assets can load from the PWA cache. AI coaching, sign-in, Supabase, and data requests still require a connection and are not cached.
 
 ---
 
-## 📈 Future Improvements
+## ✅ Quality checks
 
-- [ ] User authentication and persistent accounts
-- [ ] Saved and named workout programs
-- [ ] Progress tracking with charts and analytics
-- [ ] AI-generated weekly meal plans with calorie breakdown
-- [ ] Mobile-first responsive redesign
-- [ ] Push notifications for workout reminders
+- `npm run pwa:verify` validates required PWA files, manifest metadata, offline fallback wiring, and API-cache bypass.
+- `npm run lint` checks code quality.
+- `npm run typecheck` checks TypeScript.
+- `npm run build` validates the production application.
+- `npm run verify` runs all checks in order.
 
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+---
+
+## 📈 Future improvements
+
+- [ ] Sync profiles, saved plans, and progress entries to Supabase per signed-in user.
+- [ ] Add ownership checks for cloud-synced data.
+- [ ] Add reminders and optional push notifications.
+- [ ] Add progress charts and long-term analytics.
+- [ ] Complete real-device checks for installation, offline fallback, sharing, and authentication.
 
 ---
 
 ## ⚠️ Disclaimer
 
-This project provides general, AI-generated fitness and nutrition information for educational and portfolio purposes. It is **not a substitute for advice from a certified personal trainer, registered dietitian, or physician**. Consult a qualified professional before starting any new workout or diet program, especially if you have an existing health condition or injury.
-
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+AI Fitness Coach provides general, AI-generated fitness and nutrition education. It is not medical advice and does not replace a certified trainer, registered dietitian, or physician. Consult a qualified professional before beginning a new workout or diet plan, especially if you have an injury, medical condition, or dietary concern.
 
 ---
 
@@ -343,11 +253,3 @@ This project provides general, AI-generated fitness and nutrition information fo
 [![GitHub](https://img.shields.io/badge/GitHub-yashrajagawane-181717?style=flat-square&logo=github)](https://github.com/yashrajagawane)
 
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
-
----
-
-<div align="center">
-
-**⭐ If you found this project useful, please consider starring the repository!**
-
-</div>
