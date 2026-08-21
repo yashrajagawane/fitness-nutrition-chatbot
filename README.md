@@ -41,32 +41,36 @@
 
 ### 🖥️ Desktop — Dashboard Experience
  
-<table align="center">
-<tr>
-<td align="center"><b>AI Coaching Dashboard</b><br/><img src="screenshots/ai-fitness-coach-dashboard.png" width="600"/></td>
-</tr>
-<tr>
-<td align="center"><b>5-Day Workout Plan</b><br/><img src="screenshots/5-day-workout-plan.png" width="600"/></td>
-</tr>
-<tr>
-<td align="center"><b>Progress &amp; Saved Plans</b><br/><img src="screenshots/progress-and-saved-plans.png" width="600"/></td>
-</tr>
-</table>
-
+<p align="center">
+<b>AI Coaching Dashboard</b><br/>
+<img src="screenshots/ai-fitness-coach-dashboard.png" width="700"/>
+</p>
+<p align="center">
+<b>5-Day Workout Plan</b><br/>
+<img src="screenshots/5-day-workout-plan.png" width="700"/>
+</p>
+<p align="center">
+<b>Progress &amp; Saved Plans</b><br/>
+<img src="screenshots/progress-and-saved-plans.png" width="700"/>
+</p>
 ### 📱 Mobile — PWA Experience
-
-<table align="center">
-<tr>
-<td align="center" width="50%"><b>AI Coaching Chat</b><br/><img src="screenshots/mobile-ai-fitness-chat.png" width="260"/></td>
-<td align="center" width="50%"><b>5-Day Workout Plan</b><br/><img src="screenshots/mobile-5-day-workout-plan.png" width="260"/></td>
-</tr>
-<tr>
-<td align="center" width="50%"><b>Navigation Sidebar</b><br/><img src="screenshots/mobile-navigation-sidebar.png" width="260"/></td>
-<td align="center" width="50%"><b>Progress &amp; Saved Plans</b><br/><img src="screenshots/mobile-progress-and-saved-plans.png" width="260"/></td>
-</tr>
-</table>
-<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
-
+ 
+<p align="center">
+<img src="screenshots/mobile-ai-fitness-chat.png" width="260"/>
+&nbsp;&nbsp;&nbsp;
+<img src="screenshots/mobile-5-day-workout-plan.png" width="260"/>
+</p>
+<p align="center">
+<sub><b>AI Coaching Chat</b></sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub><b>5-Day Workout Plan</b></sub>
+</p>
+<p align="center">
+<img src="screenshots/mobile-navigation-sidebar.png" width="260"/>
+&nbsp;&nbsp;&nbsp;
+<img src="screenshots/mobile-progress-and-saved-plans.png" width="260"/>
+</p>
+<p align="center">
+<sub><b>Navigation Sidebar</b></sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub><b>Progress &amp; Saved Plans</b></sub>
+</p>
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
