@@ -24,12 +24,6 @@
 
 <div align="center">
 
-### Mobile PWA chat
-
-<img src="screenshots/mobile-pwa-chat.png" alt="AI Fitness Coach mobile PWA chat screen" width="320" />
-
-Responsive phone layout with a compact composer, safe-area spacing, sharing, and sidebar navigation.
-
 ### Desktop chat workspace
 
 ![AI Fitness Coach desktop chat workspace](screenshots/chat.png)
