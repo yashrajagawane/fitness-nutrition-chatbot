@@ -40,12 +40,16 @@
 ## 📸 Preview
 
 ### 🖥️ Desktop — Dashboard Experience
-
-<table>
+ 
+<table align="center">
 <tr>
-<td align="center" width="33%"><b>AI Coaching Dashboard</b><br/><img src="screenshots/ai-fitness-coach-dashboard.png" width="280"/></td>
-<td align="center" width="33%"><b>5-Day Workout Plan</b><br/><img src="screenshots/5-day-workout-plan.png" width="280"/></td>
-<td align="center" width="33%"><b>Progress &amp; Saved Plans</b><br/><img src="screenshots/progress-and-saved-plans.png" width="280"/></td>
+<td align="center"><b>AI Coaching Dashboard</b><br/><img src="screenshots/ai-fitness-coach-dashboard.png" width="600"/></td>
+</tr>
+<tr>
+<td align="center"><b>5-Day Workout Plan</b><br/><img src="screenshots/5-day-workout-plan.png" width="600"/></td>
+</tr>
+<tr>
+<td align="center"><b>Progress &amp; Saved Plans</b><br/><img src="screenshots/progress-and-saved-plans.png" width="600"/></td>
 </tr>
 </table>
 
