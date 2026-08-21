@@ -39,8 +39,6 @@
 
 ## 📸 Preview
 
-> Screenshots live in the `screenshots/` folder. Desktop captures sit at the root; mobile captures are prefixed with `mobile-`.
-
 ### 🖥️ Desktop — Dashboard Experience
 
 <table>
