@@ -53,27 +53,6 @@
 <tr><td align="center"><b>Progress &amp; Saved Plans</b></td></tr>
 <tr><td align="center"><img src="screenshots/progress-and-saved-plans.png" width="100%"/></td></tr>
 </table>
-
-### 📱 Mobile — PWA Experience
- 
-<table width="100%">
-<tr>
-<td align="center" width="50%"><b>AI Coaching Chat</b></td>
-<td align="center" width="50%"><b>5-Day Workout Plan</b></td>
-</tr>
-<tr>
-<td align="center"><img src="screenshots/mobile-ai-fitness-chat.png" width="100%"/></td>
-<td align="center"><img src="screenshots/mobile-5-day-workout-plan.png" width="100%"/></td>
-</tr>
-<tr>
-<td align="center"><b>Navigation Sidebar</b></td>
-<td align="center"><b>Progress &amp; Saved Plans</b></td>
-</tr>
-<tr>
-<td align="center"><img src="screenshots/mobile-navigation-sidebar.png" width="100%"/></td>
-<td align="center"><img src="screenshots/mobile-progress-and-saved-plans.png" width="100%"/></td>
-</tr>
-</table>
  
 <p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
