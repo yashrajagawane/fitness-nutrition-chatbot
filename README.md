@@ -38,9 +38,7 @@
 ---
 
 ## 📸 Preview
- 
-> Screenshots live in the `screenshots/` folder. Desktop captures sit at the root; mobile captures are prefixed with `mobile-`.
- 
+  
 ### 🖥️ Desktop — Dashboard Experience
  
 <table width="100%">
@@ -55,6 +53,7 @@
 <tr><td align="center"><b>Progress &amp; Saved Plans</b></td></tr>
 <tr><td align="center"><img src="screenshots/progress-and-saved-plans.png" width="100%"/></td></tr>
 </table>
+
 ### 📱 Mobile — PWA Experience
  
 <table width="100%">
