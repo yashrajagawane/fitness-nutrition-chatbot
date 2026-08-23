@@ -1132,7 +1132,7 @@ export default function App() {
                 onClick={()=>sendMessage()}
                 disabled={!input.trim()||loading||streaming}
                 aria-label="Send message"
-                className="absolute right-2 top-2 bottom-2 min-h-11 min-w-11 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-800 disabled:text-zinc-600 text-white px-4 rounded-xl transition-all shadow-md flex items-center justify-center"
+                className="absolute right-2 top-1/2 h-11 w-11 -translate-y-1/2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-800 disabled:text-zinc-600 text-white rounded-xl transition-all shadow-md flex items-center justify-center"
               >
                 <Send size={18}/>
               </button>
