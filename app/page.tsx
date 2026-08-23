@@ -73,7 +73,7 @@ const Sidebar = memo(
         <aside
           className={`fixed lg:relative inset-y-0 left-0 z-50 flex flex-col h-[100dvh] border-r border-zinc-800 
           bg-[#0c0c0e] transition-all duration-300 ease-in-out
-          ${isOpen ? "w-72 translate-x-0" : "-translate-x-full lg:translate-x-0 lg:w-0 lg:hidden"}`}
+          ${isOpen ? "w-72 translate-x-0 lg:w-64" : "-translate-x-full lg:translate-x-0 lg:w-0 lg:hidden"}`}
         >
           {/* Header & Brand */}
           <div className="px-4 py-3.5 border-b border-zinc-800 flex items-center justify-between">

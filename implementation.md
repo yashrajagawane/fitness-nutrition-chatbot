@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: Phase 13 — Sidebar Button Sizing
+## Current Phase: Phase 14 — Desktop Sidebar Width
 
 Status: **Complete**
 
@@ -195,6 +195,25 @@ The following checks passed:
 ### Phase 11 GitHub Commit
 
 1. `fix: improve mobile shell and first visit`
+
+The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, sidebar access, and authentication.
+
+### Phase 14 Completed Work
+
+- Reduced the open sidebar width from 288px to 256px on desktop screens.
+- Kept the mobile sidebar at its existing width for comfortable touch use.
+- Preserved the collapsed desktop sidebar and all navigation behavior.
+
+### Phase 14 Verification
+
+The following checks passed:
+
+- `npm run verify`
+- `git diff --check`
+
+### Phase 14 GitHub Commit
+
+1. `fix: reduce desktop sidebar width`
 
 The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, sidebar access, and authentication.
 
