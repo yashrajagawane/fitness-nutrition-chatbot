@@ -4,45 +4,57 @@
 
 # 🏋️ AI Fitness Coach
 
-### An AI-powered fitness and nutrition coach for the browser and your phone home screen.
+### An AI-powered fitness and nutrition coach for the browser — and your phone's home screen.
 
 [![Launch App](https://img.shields.io/badge/Launch%20AI%20Fitness%20Coach-22c55e?style=for-the-badge&logo=vercel&logoColor=white)](https://fitness-nutrition-chatbot.vercel.app)
 
-![Next.js](https://img.shields.io/badge/Next.js-App%20Router-black?style=flat-square&logo=next.js&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-Authentication-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
 ![PWA](https://img.shields.io/badge/PWA-Installable-5A0FC8?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)
 
-**[Preview](#-preview)** · **[Features](#-features)** · **[Setup](#-local-development)** · **[PWA guide](#-phone-pwa-experience)**
+**[Preview](#-preview)** · **[Features](#-features)** · **[Tech Stack](#-tech-stack)** · **[Setup](#-local-development)** · **[PWA Guide](#-phone-pwa-experience)**
 
 </div>
 
 ---
 
+## 📋 Table of Contents
+
+- [Preview](#-preview)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Architecture](#️-architecture)
+- [Project Structure](#-project-structure)
+- [Local Development](#-local-development)
+- [Phone PWA Experience](#-phone-pwa-experience)
+- [Quality Checks](#-quality-checks)
+- [Roadmap](#-future-improvements)
+- [Disclaimer](#️-disclaimer)
+- [Author](#-author)
+
+---
+
 ## 📸 Preview
-
-<div align="center">
-
-### Mobile PWA chat
-
-<img src="screenshots/mobile-pwa-chat.png" alt="AI Fitness Coach mobile PWA chat screen" width="320" />
-
-Responsive phone layout with a compact composer, safe-area spacing, sharing, and sidebar navigation.
-
-### Desktop chat workspace
-
-![AI Fitness Coach desktop chat workspace](screenshots/chat.png)
-
-### Fitness profile
-
-![Fitness profile editor](screenshots/profile.png)
-
-### Structured workout plan
-
-![AI-generated workout plan card](screenshots/workout.png)
-
-</div>
+  
+### 🖥️ Desktop — Dashboard Experience
+ 
+<table width="100%">
+<tr><td align="center"><b>AI Coaching Dashboard</b></td></tr>
+<tr><td align="center"><img src="screenshots/ai-fitness-coach-dashboard.png" width="100%"/></td></tr>
+</table>
+<table width="100%">
+<tr><td align="center"><b>5-Day Workout Plan</b></td></tr>
+<tr><td align="center"><img src="screenshots/5-day-workout-plan.png" width="100%"/></td></tr>
+</table>
+<table width="100%">
+<tr><td align="center"><b>Progress &amp; Saved Plans</b></td></tr>
+<tr><td align="center"><img src="screenshots/progress-and-saved-plans.png" width="100%"/></td></tr>
+</table>
+ 
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -95,9 +107,11 @@ Responsive phone layout with a compact composer, safe-area spacing, sharing, and
 - Request validation, rate limiting, request IDs, no-store API responses, and a health endpoint.
 - Automated PWA readiness checks validate manifest, icons, offline fallback, and service-worker safety boundaries.
 
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+
 ---
 
-## 🛠 Tech stack
+## 🛠 Tech Stack
 
 | Technology | Purpose |
 | --- | --- |
@@ -109,6 +123,8 @@ Responsive phone layout with a compact composer, safe-area spacing, sharing, and
 | React Markdown + Lucide | Rich responses and UI icons |
 | Service Worker + Web Manifest | Installable PWA and offline fallback |
 | Vercel | Deployment and CI/CD |
+
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
@@ -126,9 +142,11 @@ flowchart LR
 
 The service worker does not cache Gemini, Supabase, authentication, or API requests. This keeps private and live data network-only while still allowing a useful offline app shell.
 
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+
 ---
 
-## 📂 Project structure
+## 📂 Project Structure
 
 ```text
 app/
@@ -154,9 +172,11 @@ screenshots/                  # README preview images
 supabase/schema.sql           # Supabase database schema
 ```
 
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+
 ---
 
-## 🚀 Local development
+## 🚀 Local Development
 
 ### 1. Clone and install
 
@@ -202,9 +222,11 @@ This runs the PWA readiness check, ESLint, TypeScript typecheck, and production 
 DEPLOYMENT_URL=https://your-deployment.vercel.app npm run smoke
 ```
 
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+
 ---
 
-## 📲 Phone PWA experience
+## 📲 Phone PWA Experience
 
 ### Android
 
@@ -218,25 +240,33 @@ Open the app in Safari, tap **Share**, then choose **Add to Home Screen**. The a
 
 The application shell and static assets can load from the PWA cache. AI coaching, sign-in, Supabase, and data requests still require a connection and are not cached.
 
----
-
-## ✅ Quality checks
-
-- `npm run pwa:verify` validates required PWA files, manifest metadata, offline fallback wiring, and API-cache bypass.
-- `npm run lint` checks code quality.
-- `npm run typecheck` checks TypeScript.
-- `npm run build` validates the production application.
-- `npm run verify` runs all checks in order.
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
-## 📈 Future improvements
+## ✅ Quality Checks
+
+| Command | What it checks |
+| --- | --- |
+| `npm run pwa:verify` | Required PWA files, manifest metadata, offline fallback wiring, and API-cache bypass |
+| `npm run lint` | Code quality |
+| `npm run typecheck` | TypeScript correctness |
+| `npm run build` | Production build validity |
+| `npm run verify` | Runs all of the above, in order |
+
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
+
+---
+
+## 📈 Future Improvements
 
 - [ ] Sync profiles, saved plans, and progress entries to Supabase per signed-in user.
 - [ ] Add ownership checks for cloud-synced data.
 - [ ] Add reminders and optional push notifications.
 - [ ] Add progress charts and long-term analytics.
 - [ ] Complete real-device checks for installation, offline fallback, sharing, and authentication.
+
+<p align="right"><a href="#readme-top">back to top ⬆️</a></p>
 
 ---
 
