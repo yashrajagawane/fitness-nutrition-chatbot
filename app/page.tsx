@@ -1102,7 +1102,7 @@ export default function App() {
         </main>
 
         {/* Input Area */}
-        <footer className="safe-area-bottom z-10 border-t border-zinc-900 bg-[#050505] p-3 sm:p-6">
+        <footer className="safe-area-bottom z-10 border-t border-zinc-900 bg-[#050505] p-2 sm:p-4">
           <div className="max-w-4xl mx-auto">
             {messages.length<3&&!loading&&!streaming&&(
               <div className="flex gap-2 mb-3 flex-wrap animate-in slide-in-from-bottom-2 duration-500">
@@ -1110,7 +1110,7 @@ export default function App() {
                   <button
                     key={s.label}
                     onClick={()=>sendMessage(s.label)}
-                    className="text-[10px] sm:text-xs font-medium bg-zinc-900 border border-zinc-800 px-4 py-2.5 rounded-full hover:border-emerald-500 hover:text-emerald-400 transition-all shadow-sm"
+                    className="text-[10px] sm:text-xs font-medium bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-full hover:border-emerald-500 hover:text-emerald-400 transition-all shadow-sm"
                   >
                     {s.label}
                   </button>

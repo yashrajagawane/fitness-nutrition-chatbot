@@ -1,6 +1,6 @@
 # Implementation Status
 
-## Current Phase: Phase 15 — Composer Send Button Alignment
+## Current Phase: Phase 16 — Compact Composer Controls
 
 Status: **Complete**
 
@@ -195,6 +195,25 @@ The following checks passed:
 ### Phase 11 GitHub Commit
 
 1. `fix: improve mobile shell and first visit`
+
+The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, sidebar access, and authentication.
+
+### Phase 16 Completed Work
+
+- Reduced desktop composer-section padding to make the lower dashboard area more compact.
+- Reduced the height and horizontal padding of the three predefined suggestion prompts.
+- Preserved send-button alignment, touch usability, and mobile safe-area spacing.
+
+### Phase 16 Verification
+
+The following checks passed:
+
+- `npm run verify`
+- `git diff --check`
+
+### Phase 16 GitHub Commit
+
+1. `fix: compact composer controls`
 
 The next step is real-device acceptance testing on the deployed HTTPS app, including installation, offline fallback, reconnect, sharing, sidebar access, and authentication.
 
